@@ -19,6 +19,9 @@ public class CameraController : MonoBehaviour {
     public float rotationHorizontal = 0;
     public float rotationVertical = 0;
 
+    // Pause manager
+    public PauseManager pauseManager;
+
     // Set mouse sensitivity
     void Start ()
     {
@@ -29,30 +32,33 @@ public class CameraController : MonoBehaviour {
 	// Rotate based on mouse movement
 	void Update ()
     {
-        if (isRotatingHorizontally)
+        if (!pauseManager.isPaused)
         {
-            rotationHorizontal += Input.GetAxis("Mouse X") * mouseSensitivityX;
-
-            Quaternion quaternionHorizontal = Quaternion.AngleAxis(rotationHorizontal, Vector3.up);
-
-            transform.localRotation = Quaternion.identity * quaternionHorizontal;
-        }
-        else
-        {
-            rotationVertical += Input.GetAxis("Mouse Y") * mouseSensitivityY;
-
-            if (rotationVertical < -45.0f)
+            if (isRotatingHorizontally)
             {
-                rotationVertical = -45.0f;
+                rotationHorizontal += Input.GetAxis("Mouse X") * mouseSensitivityX;
+
+                Quaternion quaternionHorizontal = Quaternion.AngleAxis(rotationHorizontal, Vector3.up);
+
+                transform.localRotation = Quaternion.identity * quaternionHorizontal;
             }
-            if (rotationVertical >  45.0f)
+            else
             {
-                rotationVertical =  45.0f;
+                rotationVertical += Input.GetAxis("Mouse Y") * mouseSensitivityY;
+
+                if (rotationVertical < -45.0f)
+                {
+                    rotationVertical = -45.0f;
+                }
+                if (rotationVertical > 45.0f)
+                {
+                    rotationVertical = 45.0f;
+                }
+
+                Quaternion quaternionVertical = Quaternion.AngleAxis(rotationVertical, Vector3.left);
+
+                transform.localRotation = Quaternion.identity * quaternionVertical;
             }
-
-            Quaternion quaternionVertical = Quaternion.AngleAxis(rotationVertical, Vector3.left);
-
-            transform.localRotation = Quaternion.identity * quaternionVertical;
         }
 	}
 }

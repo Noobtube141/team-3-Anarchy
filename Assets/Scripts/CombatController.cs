@@ -1,51 +1,58 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CombatController : MonoBehaviour {
 
-    // All weapon prefabs
+    // All weapon and attack prefabs
     // Order from 0 - 7: pistol, ar, shotgun, sniper rifle, smg, broken bottle, knife, shovel
     public GameObject[] allWeapons;
-
-    // Control player access to melee weapons
-    public bool isKnifeUsable = false;
-    public bool isShovelUsable = false;
-
+    public GameObject[] allAttacks;
+    
     // Tracks current weapon
     public int currentWeapon = 0;
     public int weaponCount = 5;
 
     // Control combat delays
     public float[] combatDelay;
-    public float attackTime = 0.0f;
+    private float attackTime = 0.0f;
     public float[] reloadDelay;
-    public float reloadTime = 0.0f;
+    private float reloadTime = 0.0f;
 
     // Track gun ammunition
     public int[] ammo;
     public int[] clipMax;
     public int[] clipCurrent;
-    
-    // 
+
+    // Attack spawn point
+    public Transform attackSpawn;
+
+    // UI elements
+    public Text ammoDisplay;
+
+    // Respond to inputs and update UI
 	void FixedUpdate ()
     {
         // Cycle weapons
         if (Input.GetAxisRaw("Mouse ScrollWheel") != 0)
         {
-            currentWeapon += Mathf.FloorToInt(Input.GetAxisRaw("Mouse ScrollWheel") / Mathf.Abs(Input.GetAxisRaw("Mouse ScrollWheel")));
-
-            if(currentWeapon < 0)
+            if (Time.time - attackTime > combatDelay[currentWeapon] && Time.time - reloadTime > reloadDelay[currentWeapon])
             {
-                currentWeapon += weaponCount + 1;
-            }
+                currentWeapon += Mathf.FloorToInt(Input.GetAxisRaw("Mouse ScrollWheel") / Mathf.Abs(Input.GetAxisRaw("Mouse ScrollWheel")));
 
-            if(currentWeapon > weaponCount)
-            {
-                currentWeapon -= (weaponCount + 1);
-            }
+                if (currentWeapon < 0)
+                {
+                    currentWeapon += weaponCount + 1;
+                }
 
-            print(currentWeapon);
+                if (currentWeapon > weaponCount)
+                {
+                    currentWeapon -= (weaponCount + 1);
+                }
+
+                //print(currentWeapon);
+            }
         }
 
         // Control combat for pistol, shotgun, sniper rifle, broken bottle, knife and shovel
@@ -53,21 +60,19 @@ public class CombatController : MonoBehaviour {
         {
             if (Input.GetButtonDown("Fire1"))
             {
-                if (currentWeapon < 5)
+                if (Time.time - attackTime > combatDelay[currentWeapon])
                 {
-                    if (Time.time - attackTime > combatDelay[currentWeapon] && Time.time - reloadTime > reloadDelay[currentWeapon] && clipCurrent[currentWeapon] > 0)
+                    if(currentWeapon < 5)
                     {
-                        FireGun();
+                        if(Time.time - reloadTime > reloadDelay[currentWeapon] && clipCurrent[currentWeapon] > 0)
+                        {
+                            FireGun();
+                        }
                     }
-                else
-                {
-                    if (Time.time - attackTime > combatDelay[currentWeapon])
+                    else
                     {
                         MeleeAttack();
                     }
-                }
-
-                    attackTime = Time.time;
                 }
             }
         }
@@ -79,8 +84,6 @@ public class CombatController : MonoBehaviour {
                 if (Time.time - attackTime > combatDelay[currentWeapon] && Time.time - reloadTime > reloadDelay[currentWeapon] && clipCurrent[currentWeapon] > 0)
                 {
                     FireGun();
-                    
-                    attackTime = Time.time;
                 }
             }
         }
@@ -98,20 +101,50 @@ public class CombatController : MonoBehaviour {
                 }
             }
         }
+
+        // Update ammo display
+        if (currentWeapon == 0)
+        {
+            ammoDisplay.text = clipCurrent[currentWeapon].ToString() + " / " + "\u221E";
+        }
+        else if (currentWeapon < 5)
+        {
+            ammoDisplay.text = clipCurrent[currentWeapon].ToString() + " / " + ammo[currentWeapon].ToString();
+        }
+        else if (currentWeapon == 5)
+        {
+            ammoDisplay.text = "Broken bottle";
+        }
+        else if (currentWeapon == 6)
+        {
+            ammoDisplay.text = "Knife";
+        }
+        else if (currentWeapon == 7)
+        {
+            ammoDisplay.text = "Shovel";
+        }
+        else
+        {
+            ammoDisplay.text = "";
+        }
 	}
 
-    // 
+    // Instantiate bullet and decrement ammo
     void FireGun()
     {
-        // shooting
+        Instantiate(allAttacks[currentWeapon], attackSpawn.position, attackSpawn.rotation);
 
         clipCurrent[currentWeapon] -= 1;
+
+        attackTime = Time.time;
     }
 
-    // 
+    // Instantiate melee weapon
     void MeleeAttack()
     {
-        // instantiate melee weapon prefab - 
+        Instantiate(allAttacks[currentWeapon], attackSpawn.position + Vector3.down * 0.125f, attackSpawn.rotation, gameObject.transform);
+
+        attackTime = Time.time;
     }
 
     // Control reloading
@@ -138,5 +171,17 @@ public class CombatController : MonoBehaviour {
         {
             clipCurrent[currentWeapon] = clipMax[currentWeapon];
         }
+    }
+
+    // Increase weaponCount to allow access to knife
+    public void MakeKnifeUsable()
+    {
+        weaponCount = 6;
+    }
+
+    // Increase weaponCount to allow access to shovel
+    public void MakeShovelUsable()
+    {
+        weaponCount = 7;
     }
 }
