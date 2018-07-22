@@ -16,13 +16,16 @@ public class PlayerStatusManager : MonoBehaviour {
     public Text healthValue;
     public Text armourValue;
 
+    // Temporary
     public float countdown = 7.5f;
 
+    // stuff?
 	void Start ()
     {
 		
 	}
 	
+    // Update player UI
 	void Update ()
     {
         // Set UI values
@@ -32,6 +35,7 @@ public class PlayerStatusManager : MonoBehaviour {
         healthValue.text = playerHealth.ToString();
         armourValue.text = playerArmour.ToString();
 
+        // Temporary - auto damage player
         countdown -= Time.deltaTime;
 
         if(countdown <= 0.0f)
@@ -40,14 +44,9 @@ public class PlayerStatusManager : MonoBehaviour {
 
             countdown = 7.5f;
         }
-
-        // Detect death
-        if(playerHealth <= 0.0f)
-        {
-            OnDeath();
-        }
     }
 
+    // Called by enemies. Receieve damage and detect death
     public void TakeDamage(int damage)
     {
         int healthDamage = damage;
@@ -71,8 +70,15 @@ public class PlayerStatusManager : MonoBehaviour {
         }
 
         playerHealth -= healthDamage;
+
+        // Detect death
+        if (playerHealth <= 0.0f)
+        {
+            OnDeath();
+        }
     }
 
+    // On player death
     private void OnDeath()
     {
         playerHealth = 0;
