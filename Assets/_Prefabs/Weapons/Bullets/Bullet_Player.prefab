@@ -26,7 +26,7 @@ GameObject:
   - component: {fileID: 114340042687240926}
   - component: {fileID: 96302053517216562}
   m_Layer: 0
-  m_Name: temp pistol bullet
+  m_Name: Bullet_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +40,7 @@ Transform:
   m_GameObject: {fileID: 1349531592167926}
   m_LocalRotation: {x: -0.17364825, y: 0, z: 0, w: 0.9848078}
   m_LocalPosition: {x: 1.3824524, y: 1.211, z: 0.598762}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.1, y: 0.04745093, z: 0.1485315}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -60,7 +60,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: 4e4024a7eaec6504090d90e6ff63017d, type: 2}
+  - {fileID: 2100000, guid: e40e5f50ca5e2ae45a1e3870e97544ec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
