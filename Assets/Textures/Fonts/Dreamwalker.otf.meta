@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: bc93d32df75a1124a8866e1172b30274
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Dreamwalker
+  fontNames:
+  - Dreamwalker
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 985e5687f8d02dc408ec3fbe1dbf3fdc, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
