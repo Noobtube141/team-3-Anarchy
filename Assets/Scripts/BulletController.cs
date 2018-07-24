@@ -11,7 +11,7 @@ public class BulletController : MonoBehaviour {
     public float magnitude = 1000.0f;
 
     // Lifetime of the bullet. Just in case
-    private float lifetime = 20.0f;
+    public float lifetime = 20.0f;
 
     // Was the bullet fired by an enemy and can hurt players?
     public bool canHurtPlayer = false;
@@ -27,7 +27,16 @@ public class BulletController : MonoBehaviour {
     // Inflict damage on collision and delete
     private void OnCollisionEnter(Collision collision)
     {
-        // check player versus enemy + inflict damage
+        // Player bullet hurts the enemy
+        if (collision.gameObject.tag == "Enemy")
+        {
+            collision.gameObject.GetComponent<EnemyStatusManager>().EnemyTakeDamage(damage);
+        }
+        // Enemy bullet hurts the player
+        else if (collision.gameObject.tag == "Player")
+        {
+            collision.gameObject.GetComponent<PlayerStatusManager>().TakeDamage(damage);
+        }
 
         Destroy(gameObject);
     }

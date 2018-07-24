@@ -16,7 +16,7 @@ public class PickupManager : MonoBehaviour {
     public int value;
 
     // Lifetime of pickup
-    private float lifetime = 20.0f;
+    private float lifetime = 7.0f;
 
 	// Set auto delete
 	void Start ()

@@ -16,6 +16,10 @@ public class PlayerStatusManager : MonoBehaviour {
     public Text healthValue;
     public Text armourValue;
 
+    // EGO manager references
+    public GameObject failStateManager;
+    public GameObject pauseManager;
+
     // Temporary
     public float countdown = 7.5f;
 
@@ -40,9 +44,9 @@ public class PlayerStatusManager : MonoBehaviour {
 
         if(countdown <= 0.0f)
         {
-            TakeDamage(48);
+            TakeDamage(100);
 
-            countdown = 7.5f;
+            countdown = 1.0f;
         }
     }
 
@@ -82,5 +86,13 @@ public class PlayerStatusManager : MonoBehaviour {
     private void OnDeath()
     {
         playerHealth = 0;
+
+        this.GetComponent<PlayerController>().enabled = false;
+        this.GetComponent<CameraController>().enabled = false;
+        transform.Find("player pov").GetComponent<CameraController>().enabled = false;
+
+        pauseManager.SetActive(false);
+
+        failStateManager.SetActive(true);
     }
 }
