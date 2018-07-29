@@ -19,16 +19,7 @@ public class PlayerStatusManager : MonoBehaviour {
     // EGO manager references
     public GameObject failStateManager;
     public GameObject pauseManager;
-
-    // Temporary
-    public float countdown = 7.5f;
-
-    // stuff?
-	void Start ()
-    {
-		
-	}
-	
+    
     // Update player UI
 	void Update ()
     {
@@ -38,16 +29,6 @@ public class PlayerStatusManager : MonoBehaviour {
 
         healthValue.text = playerHealth.ToString();
         armourValue.text = playerArmour.ToString();
-
-        // Temporary - auto damage player
-        countdown -= Time.deltaTime;
-
-        if(countdown <= 0.0f)
-        {
-            TakeDamage(100);
-
-            countdown = 1.0f;
-        }
     }
 
     // Called by enemies. Receieve damage and detect death

@@ -31,8 +31,11 @@ public class CombatController : MonoBehaviour {
     // UI elements
     public Text ammoDisplay;
 
+    // Bool controlling accessibility to exit object
+    //public bool canExit = false;
+
     // Respond to inputs and update UI
-	void FixedUpdate ()
+    void FixedUpdate ()
     {
         // Cycle weapons
         if (Input.GetAxisRaw("Mouse ScrollWheel") != 0)

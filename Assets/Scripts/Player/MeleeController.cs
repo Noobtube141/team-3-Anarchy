@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class MeleeController : MonoBehaviour {
 
+    public int damage;
+
     private void OnTriggerEnter(Collider other)
     {
-        // inflict damage
+        other.GetComponent<EnemyStatusManager>().EnemyTakeDamage(damage);
     }
 }
