@@ -50,19 +50,18 @@ public class MobileNavigator : MonoBehaviour {
 
     // Time spent checking last known player position
     public float checkTime;
-
-	// Set component references
-	void Start ()
+    
+    // Set component references
+    void Start ()
     {
         agent = GetComponent<NavMeshAgent>();
 
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 	}
 	
-	// Wander, check los, pursuit
+	// Control state behaviour and check los
 	void Update ()
     {
-        // Wander if wanderReady is trua and state is wandering
         if (wanderReady && state == "Wandering")
         {
             StartCoroutine(Wander());
