@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 23847800604498216}
   - component: {fileID: 135551223274184910}
   - component: {fileID: 114605659290745454}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: temp pickup armour
   m_TagString: Untagged
   m_Icon: {fileID: 0}

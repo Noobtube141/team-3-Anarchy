@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33027404808397346}
   - component: {fileID: 23887681198943790}
   - component: {fileID: 135043072182651646}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 136951747154135954}
   - component: {fileID: 114436067244806978}
   - component: {fileID: 114597198244722224}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: temp stationary enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}

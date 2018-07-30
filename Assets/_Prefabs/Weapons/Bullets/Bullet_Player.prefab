@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 54247994851799200}
   - component: {fileID: 114340042687240926}
   - component: {fileID: 96302053517216562}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bullet_Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -215,6 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   magnitude: 3000
+  lifetime: 7.5
   canHurtPlayer: 0
 --- !u!135 &135888653884305362
 SphereCollider:

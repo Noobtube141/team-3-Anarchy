@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33600061210383562}
   - component: {fileID: 23758746504819908}
   - component: {fileID: 135701099755543612}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 195433500436241082}
   - component: {fileID: 114002154837388656}
   - component: {fileID: 114154521395801098}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: temp mobile enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}

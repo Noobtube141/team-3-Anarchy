@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 54247994851799200}
   - component: {fileID: 114340042687240926}
   - component: {fileID: 96302053517216562}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: temp enemy bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
