@@ -25,7 +25,7 @@ public class BulletController : MonoBehaviour {
     }
     
     // Inflict damage on collision and delete
-    private void OnCollisionEnter(Collision collision)
+    /*private void OnCollisionEnter(Collision collision)
     {
         // Player bullet hurts the enemy
         if (!canHurtPlayer && collision.gameObject.tag == "Enemy")
@@ -39,5 +39,25 @@ public class BulletController : MonoBehaviour {
         }
 
         Destroy(gameObject);
+    }*/
+
+    // Inflict damage on 'collision' and delete
+    private void OnTriggerEnter(Collider other)
+    {
+        // Player bullet hurts the enemy
+        if (!canHurtPlayer && other.gameObject.tag == "Enemy")
+        {
+            other.gameObject.GetComponent<EnemyStatusManager>().EnemyTakeDamage(damage);
+        }
+        // Enemy bullet hurts the player
+        else if (canHurtPlayer && other.gameObject.tag == "Player")
+        {
+            other.gameObject.GetComponent<PlayerStatusManager>().TakeDamage(damage);
+        }
+
+        if(other.tag != "Bullet")
+        {
+            Destroy(gameObject);
+        }
     }
 }

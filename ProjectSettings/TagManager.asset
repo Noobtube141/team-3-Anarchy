@@ -8,6 +8,7 @@ TagManager:
   - Exit
   - Wander Point
   - Seeker Point
+  - Bullet
   layers:
   - Default
   - TransparentFX

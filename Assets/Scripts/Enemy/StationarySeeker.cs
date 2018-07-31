@@ -46,8 +46,8 @@ public class StationarySeeker : MonoBehaviour {
     // Enemy gunplay
     public GameObject enemyBullet;
     public Transform bulletSpawn;
-    public int InitialfireDelay;
-    public int MaxFireDelay;
+    public int initialfireDelay;
+    public int maxFireDelay;
     private int curentFireDelay;
 
     // Time spent checking last known player position
@@ -123,16 +123,10 @@ public class StationarySeeker : MonoBehaviour {
 
             RaycastHit hit;
 
-            print("within");
-
             if (Physics.Raycast(ray, out hit, losLength))
             {
-                print("direct");
-
                 if (hit.collider.tag == "Player")
                 {
-                    print("sight");
-
                     return true;
                 }
             }
@@ -150,7 +144,7 @@ public class StationarySeeker : MonoBehaviour {
         {
             if (state != "Tracking")
             {
-                curentFireDelay = InitialfireDelay;
+                curentFireDelay = initialfireDelay;
             }
 
             state = "Tracking";
@@ -250,9 +244,11 @@ public class StationarySeeker : MonoBehaviour {
 
             if (curentFireDelay < 1)
             {
-                curentFireDelay = MaxFireDelay;
+                curentFireDelay = maxFireDelay;
 
                 Instantiate(enemyBullet, bulletSpawn.position, bulletSpawn.rotation);
+                //Instantiate(enemyBullet, bulletSpawn.position, bulletSpawn.localRotation);
+                //Instantiate(enemyBullet, bulletSpawn.position, Quaternion.Euler(bulletSpawn.forward));
             }
         }
 

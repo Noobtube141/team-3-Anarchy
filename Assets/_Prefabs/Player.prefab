@@ -334,6 +334,7 @@ MonoBehaviour:
   clipMax: 070000001e000000020000000500000032000000
   clipCurrent: 0700000000000000000000000000000000000000
   attackSpawn: {fileID: 0}
+  bloom: []
   ammoDisplay: {fileID: 0}
 --- !u!114 &114317206923659326
 MonoBehaviour:
@@ -461,6 +462,12 @@ MonoBehaviour:
   clipMax: 070000001e000000020000000500000032000000
   clipCurrent: 0700000000000000000000000000000000000000
   attackSpawn: {fileID: 4636851983148588}
+  bloom:
+  - 1.5
+  - 2
+  - 3.25
+  - 0
+  - 2.75
   ammoDisplay: {fileID: 0}
 --- !u!124 &124120692453793752
 Behaviour:

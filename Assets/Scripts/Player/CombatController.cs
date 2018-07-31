@@ -28,6 +28,9 @@ public class CombatController : MonoBehaviour {
     // Attack spawn point
     public Transform attackSpawn;
 
+    // Gun bloom
+    public float[] bloom;
+
     // UI elements
     public Text ammoDisplay;
 
@@ -135,13 +138,23 @@ public class CombatController : MonoBehaviour {
     // Instantiate bullet and decrement ammo
     void FireGun()
     {
-        Instantiate(allAttacks[currentWeapon], attackSpawn.position, attackSpawn.rotation);
+        Instantiate(allAttacks[currentWeapon], attackSpawn.position, attackSpawn.rotation * Quaternion.Euler(Random.Range(-bloom[currentWeapon], bloom[currentWeapon]),
+            Random.Range(-bloom[currentWeapon], bloom[currentWeapon]), Random.Range(-bloom[currentWeapon], bloom[currentWeapon])));
+
+        if (currentWeapon == 2)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                Instantiate(allAttacks[currentWeapon], attackSpawn.position, attackSpawn.rotation * Quaternion.Euler(Random.Range(-bloom[currentWeapon], bloom[currentWeapon]),
+                    Random.Range(-bloom[currentWeapon], bloom[currentWeapon]), Random.Range(-bloom[currentWeapon], bloom[currentWeapon])));
+            }
+        }
 
         clipCurrent[currentWeapon] -= 1;
 
         attackTime = Time.time;
     }
-
+    
     // Instantiate melee weapon
     void MeleeAttack()
     {
