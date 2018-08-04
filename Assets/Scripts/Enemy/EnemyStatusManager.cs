@@ -9,7 +9,7 @@ public class EnemyStatusManager : MonoBehaviour {
     public string enemyType;
 
     // Enemy health
-    private int enemyHealth = 1;
+    public int enemyHealth = 1;
 
     // Random spawn range
     public bool isRandomlySpawned;
@@ -45,7 +45,8 @@ public class EnemyStatusManager : MonoBehaviour {
         }
         if (enemyType == "Sniper")
         {
-            enemyHealth = 80;
+            //enemyHealth = 80;
+            enemyHealth = 1;
         }
         if (enemyType == "Boss")
         {

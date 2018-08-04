@@ -49,7 +49,7 @@ public class SpawnManager : MonoBehaviour {
             {
                 if (enemyCount == 0 && waveNumber > waveMax)
                 {
-                    GameObject.FindGameObjectWithTag("Player").GetComponent<ExitDetector>().enabled = true;
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<CombatController>().EnableExiting();
                 }
             }
         }

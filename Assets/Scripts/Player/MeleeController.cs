@@ -8,6 +8,9 @@ public class MeleeController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        other.GetComponent<EnemyStatusManager>().EnemyTakeDamage(damage);
+        if(other.tag == "Enemy")
+        {
+            other.GetComponent<EnemyStatusManager>().EnemyTakeDamage(damage);
+        }
     }
 }

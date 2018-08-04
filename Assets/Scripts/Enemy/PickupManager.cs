@@ -31,20 +31,20 @@ public class PickupManager : MonoBehaviour {
         {
             if (isHealth)
             {
-                int newValue = other.GetComponent<PlayerStatusManager>().playerHealth += value;
+                int newValue = other.GetComponent<PlayerStatusManager>().playerHealth += value * 10;
 
-                if(newValue > 100)
+                if(newValue > 1000)
                 {
-                    other.GetComponent<PlayerStatusManager>().playerHealth = 100;
+                    other.GetComponent<PlayerStatusManager>().playerHealth = 1000;
                 }
             }
             else if (isArmour)
             {
-                int newValue = other.GetComponent<PlayerStatusManager>().playerArmour += value;
+                int newValue = other.GetComponent<PlayerStatusManager>().playerArmour += value * 10;
 
-                if (newValue > 100)
+                if (newValue > 1000)
                 {
-                    other.GetComponent<PlayerStatusManager>().playerArmour = 100;
+                    other.GetComponent<PlayerStatusManager>().playerArmour = 1000;
                 }
             }
             else if (isAmmo)

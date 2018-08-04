@@ -9,6 +9,7 @@ TagManager:
   - Wander Point
   - Seeker Point
   - Bullet
+  - Waypoint
   layers:
   - Default
   - TransparentFX
