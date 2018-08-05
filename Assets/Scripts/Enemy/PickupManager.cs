@@ -21,7 +21,10 @@ public class PickupManager : MonoBehaviour {
 	// Set auto delete
 	void Start ()
     {
-        Destroy(gameObject, lifetime);
+        if(!isKnife || !isShovel)
+        {
+            Destroy(gameObject, lifetime);
+        }
 	}
 
     // Apply effect on pick up

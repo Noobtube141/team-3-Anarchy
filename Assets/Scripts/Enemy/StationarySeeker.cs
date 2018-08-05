@@ -5,16 +5,20 @@ using UnityEngine.AI;
 
 public class StationarySeeker : MonoBehaviour {
 
+    // Type of mobile enemy: 9 - Sniper, 10 - Boss
+    public int type;
+
     // Player transform reference
     private Transform playerTransform;
 
-    // State: Scanning, Tracking, Checking
+    // State: Scanning, Tracking, Checking, Hurt
     public string state = "Scanning";
 
     // Checks for sight
     private bool scanReady = true;
     private bool trackReady = true;
     private bool checkReady = true;
+    private bool hurtReady = true;
     private bool losReady = true;
 
     // Line of sight movemnt speed
@@ -25,8 +29,10 @@ public class StationarySeeker : MonoBehaviour {
     //Time along turn interpolation
     private float turnTime;
 
-    // Radius of the area the enemy will scan relative to itself
-    public float scanRadius;
+    // Random scan radius control
+    public float scanRadiusMax;
+    public float scanRadiusMin;
+    public float scanRadiusRand;
 
     // Delay between scanning
     public float scanDelay;
@@ -53,25 +59,22 @@ public class StationarySeeker : MonoBehaviour {
     // Time spent checking last known player position
     public float checkTime;
 
-    // Array of all seeker points in range
-    //public Transform[] seekerPoints;
+    // New direction to turn to after getting hit
+    public Vector3 hurtRotation;
 
-    // Set component reference and initial sight
+    // Array of all wander points
+    private GameObject[] allSeekerPoints;
+    private bool[] allSeekerInRange;
+
+    // Set component reference, initial sight and find seeker points
     void Start ()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 
         currentPosition = transform.position + transform.forward * 20;
 
-        /*// Find all seeker points in range
-        GameObject[] allSeekerPoints = GameObject.FindGameObjectsWithTag("Seeker Point");
-
-        int a = 0;
-
-        for(int i = 0; i < allSeekerPoints.Length; i++)
-        {
-
-        }*/
+        allSeekerPoints = GameObject.FindGameObjectsWithTag("Seeker Point");
+        allSeekerInRange = new bool[allSeekerPoints.Length];
     }
 
     // Control state behaviour and check los
@@ -89,6 +92,10 @@ public class StationarySeeker : MonoBehaviour {
         {
             StartCoroutine(Check());
         }
+        else if(hurtReady && state == "Hurt")
+        {
+            StartCoroutine(Hurt());
+        }
 
         if (losReady)
         {
@@ -105,7 +112,7 @@ public class StationarySeeker : MonoBehaviour {
 
         transform.LookAt(new Vector3(sightDirection.x * 20, transform.position.y, sightDirection.z * 20));
         
-        Debug.DrawRay(transform.position, currentAngle * 20, Color.blue);
+        Debug.DrawRay(transform.position, currentAngle * 20, Color.yellow);
         Debug.DrawRay(transform.position, newAngle * 20, Color.blue);
         Debug.DrawRay(transform.position, sightDirection * 20, Color.red);
 
@@ -179,7 +186,7 @@ public class StationarySeeker : MonoBehaviour {
 
         Vector3 position;
 
-        FindRandomPosition(transform.position, scanRadius, out position);
+        FindRandomPosition(FindRandomSeekerPoint(), scanRadiusRand, out position);
 
         if(position.magnitude > 0.0f)
         {
@@ -199,9 +206,59 @@ public class StationarySeeker : MonoBehaviour {
         scanReady = true;
     }
 
+    // Find random seeker point
+    Vector3 FindRandomSeekerPoint()
+    {
+        int randMax = 0;
+
+        for (int i = 0; i < allSeekerPoints.Length; i++)
+        {
+            float newAngle = Vector3.Angle(allSeekerPoints[i].transform.position - transform.position, sightDirection);
+
+            if (newAngle > scanRadiusMin && newAngle < scanRadiusMax)
+            {
+                allSeekerInRange[i] = true;
+
+                print("found");
+
+                randMax++;
+            }
+            else
+            {
+                allSeekerInRange[i] = false;
+            }
+        }
+
+        int rand = Random.Range(0, randMax) + 1;
+
+        int randCount = 0;
+
+        for (int i = 0; i < allSeekerInRange.Length; i++)
+        {
+            if (allSeekerInRange[i])
+            {
+                randCount++;
+
+                if (randCount >= rand)
+                {
+                    print("success");
+
+                    return allSeekerPoints[i].transform.position;
+                }
+            }
+        }
+
+        return new Vector3(transform.forward.x, 0, transform.forward.z) * 15;
+    }
+
     // Find random position
     bool FindRandomPosition(Vector3 centre, float radius, out Vector3 result)
     {
+        if (Vector3.Angle(centre - transform.position, sightDirection) < scanRadiusMin)
+        {
+            radius = scanRadiusMin / 2;
+        }
+
         for (int i = 0; i < 15; i++)
         {
             Vector3 rand = centre + Random.insideUnitSphere * radius;
@@ -216,7 +273,7 @@ public class StationarySeeker : MonoBehaviour {
             }
         }
 
-        result = Vector3.zero;
+        result = new Vector3(transform.forward.x, 0, transform.forward.z) * 15;
 
         return false;
     }
@@ -246,9 +303,30 @@ public class StationarySeeker : MonoBehaviour {
             {
                 curentFireDelay = maxFireDelay;
 
-                Instantiate(enemyBullet, bulletSpawn.position, bulletSpawn.rotation);
+                GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, bulletSpawn.rotation);
+                //GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, transform.forward * Quaternion.Euler(0, bulletSpawn.rotation.y, 0));
                 //Instantiate(enemyBullet, bulletSpawn.position, bulletSpawn.localRotation);
                 //Instantiate(enemyBullet, bulletSpawn.position, Quaternion.Euler(bulletSpawn.forward));
+
+                //GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, Quaternion.Euler(new Vector3(transform.forward.x, bulletSpawn.rotation.y, transform.forward.z)));
+
+                //GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, bulletSpawn.localRotation);
+
+                //GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, Quaternion.Euler(new Vector3(transform.forward.x, sightDirection.y, transform.forward.z)));
+                //GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, Quaternion.Euler(transform.forward));
+
+                //GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, bulletSpawn.rotation);
+                //GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, Quaternion.Euler(sightDirection.x, -bulletSpawn.rotation.y, sightDirection.z));
+
+                //GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, Quaternion.Euler(bulletSpawn.position - playerTransform.position));
+
+                //GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, Quaternion.Euler(bulletSpawn.rotation.x, transform.rotation.y, 0));
+
+                //Debug.DrawRay(bulletSpawn.position, new Vector3(transform.forward.x, bulletSpawn.rotation.y, transform.forward.z) * 20, Color.black, 10);
+                //.DrawRay(bulletSpawn.position, bulletSpawn.localRotation * 20, Color.black, 20);
+
+                newBullet.GetComponent<BulletController>().type = type;
+                newBullet.GetComponent<BulletController>().canHurtPlayer = true;
             }
         }
 
@@ -270,6 +348,47 @@ public class StationarySeeker : MonoBehaviour {
         yield return new WaitForSeconds(checkTime);
 
         checkReady = true;
+
+        state = "Scanning";
+    }
+
+    // Set new scan position relative to source of damage
+    IEnumerator Hurt()
+    {
+        hurtReady = false;
+        
+        Ray firstRay = new Ray(transform.position, sightDirection);
+
+        RaycastHit firstHit;
+
+        if (Physics.Raycast(firstRay, out firstHit))
+        {
+            currentPosition = firstHit.point;
+        }
+
+        Ray hurtRay = new Ray(transform.position, hurtRotation);
+
+        RaycastHit HurtHit;
+
+        if(Physics.Raycast(hurtRay, out HurtHit))
+        {
+            newPosition = HurtHit.point;
+        }
+        
+        currentAngle = currentPosition - transform.position;
+
+        newAngle = newPosition - transform.position;
+
+        turnTime = 0.0f;
+
+        if (sightDirection != newAngle)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+        yield return new WaitForSeconds(checkTime);
+
+        hurtReady = true;
 
         state = "Scanning";
     }

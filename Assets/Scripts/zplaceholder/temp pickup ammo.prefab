@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 135311565099677848}
   - component: {fileID: 114217914078187548}
   m_Layer: 2
-  m_Name: temp pickup ammo ar
+  m_Name: temp pickup ammo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

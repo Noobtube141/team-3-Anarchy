@@ -60,21 +60,16 @@ public class PauseManager : MonoBehaviour {
             Cursor.lockState = CursorLockMode.Locked;
         }
     }
-
-    // Return to main menu on click
-    public void ReturnToMenu()
-    {
-        SceneManager.LoadScene(scene);
-    }
-
+    
     // Pause game when window is covered
     private void OnApplicationPause(bool pause)
     {
         if (pause)
         {
-            isPaused = pause;
-
-            Cursor.lockState = CursorLockMode.None;
+            if (!isPaused)
+            {
+                TogglePause();
+            }
         }
     }
 
@@ -83,9 +78,16 @@ public class PauseManager : MonoBehaviour {
     {
         if (!focus)
         {
-            isPaused = !focus;
-
-            Cursor.lockState = CursorLockMode.None;
+            if (!isPaused)
+            {
+                TogglePause();
+            }
         }
+    }
+
+    // Return to main menu on click
+    public void ReturnToMenu()
+    {
+        SceneManager.LoadScene(scene);
     }
 }

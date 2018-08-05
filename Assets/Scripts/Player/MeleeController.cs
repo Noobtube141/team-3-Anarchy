@@ -8,9 +8,13 @@ public class MeleeController : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Enemy")
+        if (other.gameObject.tag == "Enemy Weakness")
         {
-            other.GetComponent<EnemyStatusManager>().EnemyTakeDamage(damage);
+            other.gameObject.GetComponentInParent<EnemyStatusManager>().EnemyTakeDamage(Mathf.FloorToInt(damage * 1.5f), -1, GameObject.FindGameObjectWithTag("Player").transform.position - other.transform.position);
+        }
+        else if (other.tag == "Enemy")
+        {
+            other.GetComponent<EnemyStatusManager>().EnemyTakeDamage(damage, -1, GameObject.FindGameObjectWithTag("Player").transform.position - other.transform.position);
         }
     }
 }

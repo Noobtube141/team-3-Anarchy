@@ -35,7 +35,7 @@ public class PlayerStatusManager : MonoBehaviour {
     public void TakeDamage(int damage)
     {
         int healthDamage = damage * 10;
-
+        
         if (playerArmour > 0.0f)
         {
             int armourDamage = Mathf.FloorToInt(healthDamage * 0.75f);
@@ -69,6 +69,7 @@ public class PlayerStatusManager : MonoBehaviour {
         playerHealth = 0;
 
         this.GetComponent<PlayerController>().enabled = false;
+        this.GetComponent<CombatController>().enabled = false;
         this.GetComponent<CameraController>().enabled = false;
         transform.Find("player pov").GetComponent<CameraController>().enabled = false;
 

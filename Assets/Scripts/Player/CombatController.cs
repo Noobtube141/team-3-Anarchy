@@ -30,7 +30,10 @@ public class CombatController : MonoBehaviour {
     // Attack spawn point
     public Transform attackSpawn;
 
-    // Gun bloom
+    // Gun stats
+    public int[] damage;
+    public float[] bulletSpeed;
+    public float[] bulletLife;
     public float[] bloom;
 
     // Sniper scope fov
@@ -38,6 +41,9 @@ public class CombatController : MonoBehaviour {
     public int fovAlt = 1;
     private Coroutine fovCoroutine;
 
+    // Player status manager reference
+    private PlayerController playerController;
+    
     // UI elements
     public Text ammoDisplay;
 
@@ -54,6 +60,12 @@ public class CombatController : MonoBehaviour {
     // Radial inventory menu
     public GameObject inventory;
     public bool isInventoryActive = false;
+
+    // Set component references
+    private void Start()
+    {
+        playerController = gameObject.GetComponent<PlayerController>();
+    }
 
     // Respond to inputs and update UI
     void FixedUpdate ()
@@ -153,8 +165,8 @@ public class CombatController : MonoBehaviour {
             }
         }
 
-        // Control combat while the inventory is closed
-        if (!isInventoryActive)
+        // Control combat while the inventory is closed and not running
+        if (!isInventoryActive && !playerController.isSprinting)
         {
             // Control combat for pistol, shotgun, sniper rifle, broken bottle, knife and shovel
             if (currentWeapon != 1 && currentWeapon != 4)
@@ -256,15 +268,19 @@ public class CombatController : MonoBehaviour {
     // Instantiate bullet and decrement ammo
     void FireGun()
     {
-        Instantiate(allAttacks[currentWeapon], attackSpawn.position, attackSpawn.rotation * Quaternion.Euler(Random.Range(-bloom[currentWeapon], bloom[currentWeapon]),
+        GameObject newBullet = Instantiate(allAttacks[currentWeapon], attackSpawn.position, attackSpawn.rotation * Quaternion.Euler(Random.Range(-bloom[currentWeapon], bloom[currentWeapon]),
             Random.Range(-bloom[currentWeapon], bloom[currentWeapon]), Random.Range(-bloom[currentWeapon], bloom[currentWeapon])));
 
+        newBullet.GetComponent<BulletController>().type = currentWeapon;
+        
         if (currentWeapon == 2)
         {
             for (int i = 0; i < 5; i++)
             {
-                Instantiate(allAttacks[currentWeapon], attackSpawn.position, attackSpawn.rotation * Quaternion.Euler(Random.Range(-bloom[currentWeapon], bloom[currentWeapon]),
+                newBullet = Instantiate(allAttacks[currentWeapon], attackSpawn.position, attackSpawn.rotation * Quaternion.Euler(Random.Range(-bloom[currentWeapon], bloom[currentWeapon]),
                     Random.Range(-bloom[currentWeapon], bloom[currentWeapon]), Random.Range(-bloom[currentWeapon], bloom[currentWeapon])));
+
+                newBullet.GetComponent<BulletController>().type = currentWeapon;
             }
         }
 

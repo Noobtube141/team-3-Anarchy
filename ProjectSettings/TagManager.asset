@@ -10,6 +10,7 @@ TagManager:
   - Seeker Point
   - Bullet
   - Waypoint
+  - Enemy Weakness
   layers:
   - Default
   - TransparentFX
