@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class PlayerStatusManager : MonoBehaviour {
 
     // Player health and armour values
-    public int playerHealth = 100;
-    public int playerArmour = 100;
+    public int playerHealth = 1000;
+    public int playerArmour = 1000;
 
     // UI component references
     public Image healthBar;
@@ -19,26 +19,32 @@ public class PlayerStatusManager : MonoBehaviour {
     // EGO manager references
     public GameObject failStateManager;
     public GameObject pauseManager;
-    
+
+    // Prevent the player from being destroyed between levels
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     // Update player UI
-	void Update ()
+    void Update ()
     {
         // Set UI values
-        healthBar.fillAmount = playerHealth / 100.0f;
-        armourBar.fillAmount = playerArmour / 100.0f;
+        healthBar.fillAmount = playerHealth / 1000.0f;
+        armourBar.fillAmount = playerArmour / 1000.0f;
 
-        healthValue.text = playerHealth.ToString();
-        armourValue.text = playerArmour.ToString();
+        healthValue.text = Mathf.FloorToInt(playerHealth / 10.0f).ToString();
+        armourValue.text = Mathf.FloorToInt(playerArmour / 10.0f).ToString();
     }
 
     // Called by enemies. Receieve damage and detect death
     public void TakeDamage(int damage)
     {
-        int healthDamage = damage;
-
+        int healthDamage = damage * 10;
+        
         if (playerArmour > 0.0f)
         {
-            int armourDamage = Mathf.FloorToInt(damage * 0.75f);
+            int armourDamage = Mathf.FloorToInt(healthDamage * 0.75f);
 
             playerArmour -= armourDamage;
 
@@ -69,6 +75,7 @@ public class PlayerStatusManager : MonoBehaviour {
         playerHealth = 0;
 
         this.GetComponent<PlayerController>().enabled = false;
+        this.GetComponent<CombatController>().enabled = false;
         this.GetComponent<CameraController>().enabled = false;
         transform.Find("player pov").GetComponent<CameraController>().enabled = false;
 

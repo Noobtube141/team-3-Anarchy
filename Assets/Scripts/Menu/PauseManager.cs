@@ -14,32 +14,75 @@ public class PauseManager : MonoBehaviour {
     // Scene to load
     public string scene;
 
-	// Pause on pressing escape
-	void Update ()
+    // Radial inventory menu
+    public GameObject inventory;
+
+    // Make cursor invisible
+    private void Start()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    // Pause on pressing escape
+    void Update ()
+    {
+        if (!isPaused)
         {
-            isPaused = !isPaused;
+            if (Input.GetKeyDown(KeyCode.Escape))
+            //if (Input.GetKeyDown(KeyCode.Q))
+            {
+                TogglePause();
+
+                inventory.SetActive(false);
+            }
         }
+	}
+    
+    // Toggle pause status
+    public void TogglePause()
+    {
+        isPaused = !isPaused;
 
         if (isPaused)
         {
             Time.timeScale = 0;
 
             pauseMenu.SetActive(isPaused);
+
+            Cursor.lockState = CursorLockMode.None;
         }
         else
         {
             Time.timeScale = 1;
 
             pauseMenu.SetActive(isPaused);
-        }
-	}
 
-    // Toggle pause status on button click
-    public void TogglePause()
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
+    
+    // Pause game when window is covered
+    private void OnApplicationPause(bool pause)
     {
-        isPaused = !isPaused;
+        if (pause)
+        {
+            if (!isPaused)
+            {
+                TogglePause();
+            }
+        }
+    }
+
+    // Pause game when leaving window
+    private void OnApplicationFocus(bool focus)
+    {
+        if (!focus)
+        {
+            if (!isPaused)
+            {
+                TogglePause();
+            }
+        }
     }
 
     // Return to main menu on click

@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BulletController : MonoBehaviour {
+    
+    // Type of bullet. Initialiased upon instantiation. Types: Pistol, AR, Shotgun, Sniper, SMG, Bandit, Red, Black, EnemySniper, Boss
+    public int type;
 
     // Damage value
-    public int damage = 1;
+    public int[] damage;
 
     // Speed of the bullet
-    public float magnitude = 1000.0f;
+    public float[] magnitude;
 
     // Lifetime of the bullet. Just in case
-    public float lifetime = 7.5f;
+    public float[] lifetime;
 
     // Was the bullet fired by an enemy and can hurt players?
     public bool canHurtPlayer = false;
@@ -19,40 +22,28 @@ public class BulletController : MonoBehaviour {
     // Add force and propel the bullet and set auto delete
     private void Start()
     {
-        GetComponent<Rigidbody>().AddForce(transform.forward * magnitude);
+        GetComponent<Rigidbody>().AddForce(transform.forward * magnitude[type]);
 
-        Destroy(gameObject, lifetime);
+        Destroy(gameObject, lifetime[type]);
     }
     
-    // Inflict damage on collision and delete
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        // Player bullet hurts the enemy
-        if (!canHurtPlayer && collision.gameObject.tag == "Enemy")
-        {
-            collision.gameObject.GetComponent<EnemyStatusManager>().EnemyTakeDamage(damage);
-        }
-        // Enemy bullet hurts the player
-        else if (canHurtPlayer && collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.GetComponent<PlayerStatusManager>().TakeDamage(damage);
-        }
-
-        Destroy(gameObject);
-    }*/
-
     // Inflict damage on 'collision' and delete
     private void OnTriggerEnter(Collider other)
     {
-        // Player bullet hurts the enemy
-        if (!canHurtPlayer && other.gameObject.tag == "Enemy")
+        // Player bullet greatly hurts enemy weakness
+        if (!canHurtPlayer && other.gameObject.tag == "Enemy Weakness")
         {
-            other.gameObject.GetComponent<EnemyStatusManager>().EnemyTakeDamage(damage);
+            other.gameObject.GetComponentInParent<EnemyStatusManager>().EnemyTakeDamage(Mathf.FloorToInt(damage[type] * 1.5f), type, -transform.forward);
+        }
+        // Player bullet hurts the enemy
+        else if (!canHurtPlayer && other.gameObject.tag == "Enemy")
+        {
+            other.gameObject.GetComponent<EnemyStatusManager>().EnemyTakeDamage(damage[type], type, -transform.forward);
         }
         // Enemy bullet hurts the player
         else if (canHurtPlayer && other.gameObject.tag == "Player")
         {
-            other.gameObject.GetComponent<PlayerStatusManager>().TakeDamage(damage);
+            other.gameObject.GetComponent<PlayerStatusManager>().TakeDamage(damage[type]);
         }
 
         if(other.tag != "Bullet")

@@ -7,6 +7,7 @@ public class WaypointManager : MonoBehaviour {
 
     // Component references
     private RectTransform imagePos;
+    private Image waypoint;
 
     public Transform exitObject;
     private Transform playerTransform;
@@ -15,6 +16,7 @@ public class WaypointManager : MonoBehaviour {
     private void Start()
     {
         imagePos = GetComponent<RectTransform>();
+        waypoint = GetComponent<Image>();
 
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
     }
@@ -22,9 +24,15 @@ public class WaypointManager : MonoBehaviour {
     // Keep image on object unless it is behind the player
     void LateUpdate ()
     {
-        if(Vector3.Angle(exitObject.position - playerTransform.position, playerTransform.forward) < 135)
+        if(Vector3.Angle(exitObject.position - playerTransform.position, playerTransform.forward) < 90)
         {
+            waypoint.fillAmount = 1;
+
             imagePos.position = Camera.main.WorldToScreenPoint(exitObject.position);
+        }
+        else
+        {
+            waypoint.fillAmount = 0;
         }
     }
 }

@@ -31,7 +31,10 @@ public class PlayerController : MonoBehaviour {
 
             if (Input.GetKey(KeyCode.LeftShift))
             {
-                isSprinting = true;
+                if(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+                {
+                    isSprinting = true;
+                }
 
                 movement *= sprintMultiplier;
             }

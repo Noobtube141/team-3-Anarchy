@@ -17,7 +17,5 @@ public class BulletSpawnRotator : MonoBehaviour {
     void Update ()
     {
         transform.LookAt(playerTransform);
-
-        Debug.DrawRay(transform.position, transform.forward * 20, Color.green);
 	}
 }

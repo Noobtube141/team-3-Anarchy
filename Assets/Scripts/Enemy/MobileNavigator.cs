@@ -5,27 +5,33 @@ using UnityEngine.AI;
 
 public class MobileNavigator : MonoBehaviour {
 
+    // Type of mobile enemy: 5 - Bandit, 6 - RedSoldier, 7 - BlackSoldier, 8 - SWAT
+    public int type;
+
     // Navmesh agent component reference
     private NavMeshAgent agent;
 
     // Player transform reference
     private Transform playerTransform;
 
-    // State: Wandering, Pursuing and Checking
+    // State: Wandering, Pursuing, Checking, Hurt
     public string state = "Wandering";
 
     // Checks for movement
     private bool wanderReady = true;
     private bool pursueReady = true;
     private bool checkReady = true;
+    private bool hurtReady = true;
     private bool losReady = true;
 
     // Movement speeds
     public float wanderSpeed;
     public float pursuitSpeed;
 
-    // Radius of area the enemy roams within relative to itself
-    public float wanderRadius;
+    // Random roam radius control
+    public float wanderRadiusMax;
+    public float wanderRadiusMin;
+    public float wanderRadiusRand;
 
     // Delay between wandering
     public float wanderDelay;
@@ -50,13 +56,23 @@ public class MobileNavigator : MonoBehaviour {
 
     // Time spent checking last known player position
     public float checkTime;
-    
-    // Set component references
+
+    // New direction to turn to after getting hit
+    public Vector3 hurtRotation;
+
+    // Array of all wander points
+    private GameObject[] allWanderPoints;
+    private bool[] allWanderInRange;
+
+    // Set component references and find wander points
     void Start ()
     {
         agent = GetComponent<NavMeshAgent>();
 
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+
+        allWanderPoints = GameObject.FindGameObjectsWithTag("Wander Point");
+        allWanderInRange = new bool[allWanderPoints.Length];
 	}
 	
 	// Control state behaviour and check los
@@ -73,6 +89,10 @@ public class MobileNavigator : MonoBehaviour {
         else if(checkReady && state == "Checking")
         {
             StartCoroutine(Check());
+        }
+        else if(hurtReady && state == "Hurt")
+        {
+            StartCoroutine(Hurt());
         }
 
         if (losReady)
@@ -135,14 +155,14 @@ public class MobileNavigator : MonoBehaviour {
         losReady = true;
     }
 
-    // Call for wndering
+    // Wander to random position
     IEnumerator Wander()
     {
         wanderReady = false;
-
+        
         Vector3 position;
-
-        FindRandomPosition(transform.position, wanderRadius, out position);
+        
+        FindRandomPosition(FindRandomWanderPoint(), wanderRadiusRand, out position);
 
         agent.speed = wanderSpeed;
 
@@ -155,10 +175,56 @@ public class MobileNavigator : MonoBehaviour {
         wanderReady = true;
     }
 
+    // Find random wander point
+    Vector3 FindRandomWanderPoint()
+    {
+        int randMax = 0;
+
+        for (int i = 0; i < allWanderPoints.Length; i++)
+        {
+            float distance = Vector3.Distance(transform.position, allWanderPoints[i].transform.position);
+
+            if (distance > wanderRadiusMin && distance < wanderRadiusMax)
+            {
+                allWanderInRange[i] = true;
+                
+                randMax++;
+            }
+            else
+            {
+                allWanderInRange[i] = false;
+            }
+        }
+
+        int rand = Random.Range(0, randMax) + 1;
+
+        int randCount = 0;
+
+        for (int i = 0; i < allWanderInRange.Length; i++)
+        {
+            if (allWanderInRange[i])
+            {
+                randCount++;
+
+                if(randCount >= rand)
+                {
+                    return allWanderPoints[i].transform.position;
+                }
+            }
+        }
+        
+        return transform.position;
+    }
+
     // Find random position
     bool FindRandomPosition(Vector3 centre, float radius, out Vector3 result)
     {
-        for(int i = 0; i < 15; i++)
+        if(Vector3.Distance(centre, transform.position) < wanderRadiusMin)
+        {
+            radius = wanderRadiusMin / 2;
+        }
+
+        for (int i = 0; i < 15; i++)
         {
             Vector3 rand = centre + Random.insideUnitSphere * radius;
 
@@ -172,7 +238,7 @@ public class MobileNavigator : MonoBehaviour {
             }
         }
 
-        result = Vector3.zero;
+        result = transform.position;
 
         return false;
     }
@@ -198,11 +264,14 @@ public class MobileNavigator : MonoBehaviour {
             {
                 curentFireDelay = MaxFireDelay;
 
-                Instantiate(enemyBullet, bulletSpawn.position, bulletSpawn.rotation);
+                GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, bulletSpawn.rotation);
+
+                newBullet.GetComponent<BulletController>().type = type;
+                newBullet.GetComponent<BulletController>().canHurtPlayer = true;
             }
         }
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.01f);
 
         pursueReady = true;
     }
@@ -225,6 +294,44 @@ public class MobileNavigator : MonoBehaviour {
 
         checkReady = true;
 
+        state = "Wandering";
+    }
+
+    // Turn to direction of damage
+    IEnumerator Hurt()
+    {
+        hurtReady = false;
+
+        agent.SetDestination(transform.position);
+
+        float hurtTurnTime = 0;
+        
+        Vector3 initialProjected = transform.position + transform.forward * 10;
+        Vector3 hurtProjected = transform.position + hurtRotation * 10;
+
+        Vector3 hurtScanDirection = initialProjected;
+        
+        while(hurtScanDirection != hurtProjected && state == "Hurt")
+        {
+            hurtScanDirection = Vector3.Slerp(initialProjected, hurtProjected, hurtTurnTime * 5);
+
+            transform.LookAt(new Vector3(hurtScanDirection.x, transform.position.y, hurtScanDirection.z));
+            
+            /*Debug.DrawRay(transform.position, initialProjected, Color.red, 10);
+            Debug.DrawRay(transform.position, hurtProjected, Color.blue, 10);
+            Debug.DrawRay(transform.position, transform.forward * 20, Color.green, 10);*/
+
+            hurtTurnTime += Time.deltaTime;
+            
+            yield return new WaitForEndOfFrame();
+        }
+        
+        yield return new WaitForSeconds(checkTime);
+
+        hurtRotation = Vector3.zero;
+        
+        hurtReady = true;
+        
         state = "Wandering";
     }
 }

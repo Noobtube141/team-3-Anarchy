@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CombatController : MonoBehaviour {
 
@@ -15,6 +16,7 @@ public class CombatController : MonoBehaviour {
     public int weaponCount = 5;
 
     // Control combat delays
+    private float currentTime = 0.0f;
     public float[] combatDelay;
     private float attackTime = 0.0f;
     public float[] reloadDelay;
@@ -28,86 +30,214 @@ public class CombatController : MonoBehaviour {
     // Attack spawn point
     public Transform attackSpawn;
 
-    // Gun bloom
+    // Gun stats
+    public int[] damage;
+    public float[] bulletSpeed;
+    public float[] bulletLife;
     public float[] bloom;
 
+    // Sniper scope fov
+    public int fovRange;
+    public int fovAlt = 1;
+    private Coroutine fovCoroutine;
+
+    // Player status manager reference
+    private PlayerController playerController;
+    
     // UI elements
     public Text ammoDisplay;
 
-    // Bool controlling accessibility to exit object
-    //public bool canExit = false;
+    public Image sniperScope;
+
+    public Image waypoint;
+
+    // Bool controlling accessibility to exit object. Set true by spawn manager
+    public bool canExit = false;
+
+    // Scene to load upon clicking the exit object
+    public string scene;
+
+    // Radial inventory menu
+    public GameObject inventory;
+    public bool isInventoryActive = false;
+
+    // Set component references
+    private void Start()
+    {
+        playerController = gameObject.GetComponent<PlayerController>();
+    }
 
     // Respond to inputs and update UI
     void FixedUpdate ()
     {
-        // Cycle weapons
-        if (Input.GetAxisRaw("Mouse ScrollWheel") != 0)
-        {
-            if (Time.time - attackTime > combatDelay[currentWeapon] && Time.time - reloadTime > reloadDelay[currentWeapon])
-            {
-                currentWeapon += Mathf.FloorToInt(Input.GetAxisRaw("Mouse ScrollWheel") / Mathf.Abs(Input.GetAxisRaw("Mouse ScrollWheel")));
-
-                if (currentWeapon < 0)
-                {
-                    currentWeapon += weaponCount + 1;
-                }
-
-                if (currentWeapon > weaponCount)
-                {
-                    currentWeapon -= (weaponCount + 1);
-                }
-
-                //print(currentWeapon);
-            }
-        }
-
-        // Control combat for pistol, shotgun, sniper rifle, broken bottle, knife and shovel
-        if(currentWeapon != 1 && currentWeapon != 4)
+        // Exit on clicking exit object
+        if (canExit)
         {
             if (Input.GetButtonDown("Fire1"))
             {
-                if (Time.time - attackTime > combatDelay[currentWeapon])
+                Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+                Debug.DrawRay(cameraRay.origin, cameraRay.direction * 20, Color.blue);
+
+                RaycastHit hit;
+
+                if (Physics.Raycast(cameraRay, out hit))
                 {
-                    if(currentWeapon < 5)
+                    if (hit.collider.tag == "Exit" && hit.distance < 1.5f)
                     {
-                        if(Time.time - reloadTime > reloadDelay[currentWeapon] && clipCurrent[currentWeapon] > 0)
-                        {
-                            FireGun();
-                        }
+                        SceneManager.LoadScene(scene);
                     }
-                    else
-                    {
-                        MeleeAttack();
-                    }
-                }
-            }
-        }
-        // Control combat for ar and smg
-        else
-        {
-            if (Input.GetButton("Fire1"))
-            {
-                if (Time.time - attackTime > combatDelay[currentWeapon] && Time.time - reloadTime > reloadDelay[currentWeapon] && clipCurrent[currentWeapon] > 0)
-                {
-                    FireGun();
                 }
             }
         }
 
+        // Select weapons (only if not scoped)
+        if (Camera.main.fieldOfView >= 58 && fovAlt == 1)
+        {
+            // Cycle weapons with scroll wheel
+            if (Input.GetAxisRaw("Mouse ScrollWheel") != 0)
+            {
+
+                currentTime = Time.time;
+
+                if (currentTime - attackTime > combatDelay[currentWeapon] && currentTime - reloadTime > reloadDelay[currentWeapon])
+                {
+                    currentWeapon += Mathf.FloorToInt(Input.GetAxisRaw("Mouse ScrollWheel") / Mathf.Abs(Input.GetAxisRaw("Mouse ScrollWheel")));
+
+                    if (currentWeapon < 0)
+                    {
+                        currentWeapon += weaponCount + 1;
+                    }
+
+                    if (currentWeapon > weaponCount)
+                    {
+                        currentWeapon -= (weaponCount + 1);
+                    }
+                }
+            }
+
+            // Choose weapons with numbers
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                currentWeapon = 0;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                currentWeapon = 1;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                currentWeapon = 2;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha4))
+            {
+                currentWeapon = 3;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha5))
+            {
+                currentWeapon = 4;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha6))
+            {
+                currentWeapon = 5;
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha7))
+            {
+                if (weaponCount > 5)
+                {
+                    currentWeapon = 6;
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha8))
+            {
+                if (weaponCount > 6)
+                {
+                    currentWeapon = 7;
+                }
+            }
+
+            // Open radial menu
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                isInventoryActive = !isInventoryActive;
+
+                inventory.SetActive(isInventoryActive);
+            }
+        }
+
+        // Control combat while the inventory is closed and not running
+        if (!isInventoryActive && !playerController.isSprinting)
+        {
+            // Control combat for pistol, shotgun, sniper rifle, broken bottle, knife and shovel
+            if (currentWeapon != 1 && currentWeapon != 4)
+            {
+                if (Input.GetButtonDown("Fire1"))
+                {
+                    currentTime = Time.time;
+
+                    if (currentTime - attackTime > combatDelay[currentWeapon])
+                    {
+                        if (currentWeapon < 5)
+                        {
+                            if (currentTime - reloadTime > reloadDelay[currentWeapon] && clipCurrent[currentWeapon] > 0)
+                            {
+                                FireGun();
+                            }
+                        }
+                        else
+                        {
+                            MeleeAttack();
+                        }
+                    }
+                }
+            }
+            // Control combat for ar and smg
+            else
+            {
+                if (Input.GetButton("Fire1"))
+                {
+                    currentTime = Time.time;
+
+                    if (currentTime - attackTime > combatDelay[currentWeapon] && currentTime - reloadTime > reloadDelay[currentWeapon] && clipCurrent[currentWeapon] > 0)
+                    {
+                        FireGun();
+                    }
+                }
+            }
+        }
+        
         // Detect reload
         if (Input.GetKey(KeyCode.R))
         {
             if(currentWeapon < 5)
             {
-                if (Time.time - attackTime > combatDelay[currentWeapon] && Time.time - reloadTime > reloadDelay[currentWeapon])
+                currentTime = Time.time;
+
+                if (currentTime - attackTime > combatDelay[currentWeapon] && currentTime - reloadTime > reloadDelay[currentWeapon])
                 {
                     ReloadGun();
 
-                    reloadTime = Time.time;
+                    reloadTime = currentTime;
                 }
             }
         }
 
+        // Control sniper scope
+        if(currentWeapon == 3)
+        {
+            if (Input.GetButtonDown("Fire2"))
+            {
+                fovAlt *= -1;
+
+                if(fovCoroutine != null)
+                {
+                    StopCoroutine(fovCoroutine);
+                }
+
+                fovCoroutine = StartCoroutine(SniperScope(fovAlt));
+            }
+        }
+        
         // Update ammo display
         if (currentWeapon == 0)
         {
@@ -138,15 +268,19 @@ public class CombatController : MonoBehaviour {
     // Instantiate bullet and decrement ammo
     void FireGun()
     {
-        Instantiate(allAttacks[currentWeapon], attackSpawn.position, attackSpawn.rotation * Quaternion.Euler(Random.Range(-bloom[currentWeapon], bloom[currentWeapon]),
+        GameObject newBullet = Instantiate(allAttacks[currentWeapon], attackSpawn.position, attackSpawn.rotation * Quaternion.Euler(Random.Range(-bloom[currentWeapon], bloom[currentWeapon]),
             Random.Range(-bloom[currentWeapon], bloom[currentWeapon]), Random.Range(-bloom[currentWeapon], bloom[currentWeapon])));
 
+        newBullet.GetComponent<BulletController>().type = currentWeapon;
+        
         if (currentWeapon == 2)
         {
             for (int i = 0; i < 5; i++)
             {
-                Instantiate(allAttacks[currentWeapon], attackSpawn.position, attackSpawn.rotation * Quaternion.Euler(Random.Range(-bloom[currentWeapon], bloom[currentWeapon]),
+                newBullet = Instantiate(allAttacks[currentWeapon], attackSpawn.position, attackSpawn.rotation * Quaternion.Euler(Random.Range(-bloom[currentWeapon], bloom[currentWeapon]),
                     Random.Range(-bloom[currentWeapon], bloom[currentWeapon]), Random.Range(-bloom[currentWeapon], bloom[currentWeapon])));
+
+                newBullet.GetComponent<BulletController>().type = currentWeapon;
             }
         }
 
@@ -189,6 +323,30 @@ public class CombatController : MonoBehaviour {
         }
     }
 
+    // Alternate sniper scope zoom. Normal: 60, Scoped: 20
+    IEnumerator SniperScope(int alt)
+    {
+        int newFOV = (60 - fovRange + fovRange * alt) * alt;
+        
+        while (Camera.main.fieldOfView * alt < newFOV)
+        {
+            Camera.main.fieldOfView += alt * 2;
+
+            yield return new WaitForSeconds(0.01f);
+        }
+
+        Camera.main.fieldOfView = Mathf.Abs(newFOV);
+    }
+
+    // Try to swap to a weapon
+    public void InventoryWeaponSelect(int number)
+    {
+        if(number <= weaponCount)
+        {
+            currentWeapon = number;
+        }
+    }
+
     // Increase weaponCount to allow access to knife
     public void MakeKnifeUsable()
     {
@@ -199,5 +357,13 @@ public class CombatController : MonoBehaviour {
     public void MakeShovelUsable()
     {
         weaponCount = 7;
+    }
+
+    // Make exit UI visible and enable exiting
+    public void EnableExiting()
+    {
+        waypoint.gameObject.SetActive(true);
+
+        canExit = true;
     }
 }
