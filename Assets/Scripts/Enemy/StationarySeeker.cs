@@ -112,9 +112,9 @@ public class StationarySeeker : MonoBehaviour {
 
         transform.LookAt(new Vector3(sightDirection.x * 20, transform.position.y, sightDirection.z * 20));
         
-        Debug.DrawRay(transform.position, currentAngle * 20, Color.yellow);
+        /*Debug.DrawRay(transform.position, currentAngle * 20, Color.yellow);
         Debug.DrawRay(transform.position, newAngle * 20, Color.blue);
-        Debug.DrawRay(transform.position, sightDirection * 20, Color.red);
+        Debug.DrawRay(transform.position, sightDirection * 20, Color.red);*/
 
         turnTime += Time.deltaTime;
     }
@@ -218,9 +218,7 @@ public class StationarySeeker : MonoBehaviour {
             if (newAngle > scanRadiusMin && newAngle < scanRadiusMax)
             {
                 allSeekerInRange[i] = true;
-
-                print("found");
-
+                
                 randMax++;
             }
             else
@@ -241,8 +239,6 @@ public class StationarySeeker : MonoBehaviour {
 
                 if (randCount >= rand)
                 {
-                    print("success");
-
                     return allSeekerPoints[i].transform.position;
                 }
             }
@@ -303,28 +299,8 @@ public class StationarySeeker : MonoBehaviour {
             {
                 curentFireDelay = maxFireDelay;
 
-                GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, bulletSpawn.rotation);
-                //GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, transform.forward * Quaternion.Euler(0, bulletSpawn.rotation.y, 0));
-                //Instantiate(enemyBullet, bulletSpawn.position, bulletSpawn.localRotation);
-                //Instantiate(enemyBullet, bulletSpawn.position, Quaternion.Euler(bulletSpawn.forward));
-
-                //GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, Quaternion.Euler(new Vector3(transform.forward.x, bulletSpawn.rotation.y, transform.forward.z)));
-
-                //GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, bulletSpawn.localRotation);
-
-                //GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, Quaternion.Euler(new Vector3(transform.forward.x, sightDirection.y, transform.forward.z)));
-                //GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, Quaternion.Euler(transform.forward));
-
-                //GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, bulletSpawn.rotation);
-                //GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, Quaternion.Euler(sightDirection.x, -bulletSpawn.rotation.y, sightDirection.z));
-
-                //GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, Quaternion.Euler(bulletSpawn.position - playerTransform.position));
-
-                //GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, Quaternion.Euler(bulletSpawn.rotation.x, transform.rotation.y, 0));
-
-                //Debug.DrawRay(bulletSpawn.position, new Vector3(transform.forward.x, bulletSpawn.rotation.y, transform.forward.z) * 20, Color.black, 10);
-                //.DrawRay(bulletSpawn.position, bulletSpawn.localRotation * 20, Color.black, 20);
-
+                GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, Quaternion.LookRotation(playerTransform.position - bulletSpawn.position));
+                
                 newBullet.GetComponent<BulletController>().type = type;
                 newBullet.GetComponent<BulletController>().canHurtPlayer = true;
             }

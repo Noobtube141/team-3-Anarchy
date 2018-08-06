@@ -19,9 +19,15 @@ public class PlayerStatusManager : MonoBehaviour {
     // EGO manager references
     public GameObject failStateManager;
     public GameObject pauseManager;
-    
+
+    // Prevent the player from being destroyed between levels
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
     // Update player UI
-	void Update ()
+    void Update ()
     {
         // Set UI values
         healthBar.fillAmount = playerHealth / 1000.0f;

@@ -17,9 +17,5 @@ public class BulletSpawnRotator : MonoBehaviour {
     void Update ()
     {
         transform.LookAt(playerTransform);
-        
-        //transform.rotation = Quaternion.Euler(transform.rotation.x, 0, 0);
-
-        Debug.DrawRay(transform.position, transform.forward * 20, Color.green);
 	}
 }

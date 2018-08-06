@@ -317,9 +317,9 @@ public class MobileNavigator : MonoBehaviour {
 
             transform.LookAt(new Vector3(hurtScanDirection.x, transform.position.y, hurtScanDirection.z));
             
-            Debug.DrawRay(transform.position, initialProjected, Color.red, 10);
+            /*Debug.DrawRay(transform.position, initialProjected, Color.red, 10);
             Debug.DrawRay(transform.position, hurtProjected, Color.blue, 10);
-            Debug.DrawRay(transform.position, transform.forward * 20, Color.green, 10);
+            Debug.DrawRay(transform.position, transform.forward * 20, Color.green, 10);*/
 
             hurtTurnTime += Time.deltaTime;
             

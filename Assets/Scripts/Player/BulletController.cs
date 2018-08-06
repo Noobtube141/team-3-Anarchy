@@ -27,23 +27,6 @@ public class BulletController : MonoBehaviour {
         Destroy(gameObject, lifetime[type]);
     }
     
-    // Inflict damage on collision and delete
-    /*private void OnCollisionEnter(Collision collision)
-    {
-        // Player bullet hurts the enemy
-        if (!canHurtPlayer && collision.gameObject.tag == "Enemy")
-        {
-            collision.gameObject.GetComponent<EnemyStatusManager>().EnemyTakeDamage(damage);
-        }
-        // Enemy bullet hurts the player
-        else if (canHurtPlayer && collision.gameObject.tag == "Player")
-        {
-            collision.gameObject.GetComponent<PlayerStatusManager>().TakeDamage(damage);
-        }
-
-        Destroy(gameObject);
-    }*/
-
     // Inflict damage on 'collision' and delete
     private void OnTriggerEnter(Collider other)
     {

@@ -36,8 +36,7 @@ public class EnemyStatusManager : MonoBehaviour {
         }
         else if (enemyType == "RedSoldier")
         {
-            //enemyHealth = 105;
-            enemyHealth = 1;
+            enemyHealth = 105;
         }
         else if (enemyType == "BlackSoldier")
         {
@@ -49,8 +48,7 @@ public class EnemyStatusManager : MonoBehaviour {
         }
         else if (enemyType == "Sniper")
         {
-            //enemyHealth = 80;
-            enemyHealth = 1000;
+            enemyHealth = 80;
         }
         else if (enemyType == "Boss")
         {

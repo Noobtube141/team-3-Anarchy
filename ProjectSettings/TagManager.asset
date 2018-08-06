@@ -11,6 +11,7 @@ TagManager:
   - Bullet
   - Waypoint
   - Enemy Weakness
+  - Music Player
   layers:
   - Default
   - TransparentFX
