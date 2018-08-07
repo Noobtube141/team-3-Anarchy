@@ -16962,6 +16962,11 @@ Prefab:
       propertyPath: exitObject
       value: 
       objectReference: {fileID: 1309999277}
+    - target: {fileID: 223643389687067094, guid: ec5a85d0601261c469875f8630798ac9,
+        type: 2}
+      propertyPath: m_PixelPerfect
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec5a85d0601261c469875f8630798ac9, type: 2}
   m_IsPrefabParent: 0
