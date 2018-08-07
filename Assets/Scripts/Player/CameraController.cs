@@ -11,6 +11,9 @@ public class CameraController : MonoBehaviour {
     public float mouseSensitivityX;
     public float mouseSensitivityY;
 
+    // Mouse inversion
+    public int mouseInversion;
+
     // Minimum and maximum vertical rotation
     public float minVerticalRotation = -45.0f;
     public float maxVerticalRotation =  45.0f;
@@ -27,6 +30,8 @@ public class CameraController : MonoBehaviour {
     {
         mouseSensitivityX = PlayerPrefs.GetFloat("MouseSensitivityX", 15.0f);
         mouseSensitivityY = PlayerPrefs.GetFloat("MouseSensitivityY", 15.0f);
+
+        mouseInversion = PlayerPrefs.GetInt("MouseInversion", 1);
     }
 	
 	// Rotate based on mouse movement
@@ -44,7 +49,7 @@ public class CameraController : MonoBehaviour {
             }
             else
             {
-                rotationVertical += Input.GetAxis("Mouse Y") * mouseSensitivityY;
+                rotationVertical += Input.GetAxis("Mouse Y") * mouseSensitivityY * mouseInversion;
 
                 if (rotationVertical < -45.0f)
                 {
