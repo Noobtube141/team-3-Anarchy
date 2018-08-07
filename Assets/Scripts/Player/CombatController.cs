@@ -10,7 +10,18 @@ public class CombatController : MonoBehaviour {
     // Order from 0 - 7: pistol, ar, shotgun, sniper rifle, smg, broken bottle, knife, shovel
     public GameObject[] allWeapons;
     public GameObject[] allAttacks;
-    
+
+    // Animator Reference
+    private Animator weaponAnimator;
+
+    private bool FireAnim = false;
+    private bool SprintingAnim = false;
+    private bool ReloadAnim = false;
+
+    //Particle Reference and Disable
+    public GameObject MuzzleFlashPistol;
+
+
     // Tracks current weapon
     public int currentWeapon = 0;
     public int weaponCount = 5;
@@ -61,10 +72,13 @@ public class CombatController : MonoBehaviour {
     public GameObject inventory;
     public bool isInventoryActive = false;
 
+
     // Set component references
     private void Start()
     {
         playerController = gameObject.GetComponent<PlayerController>();
+        weaponAnimator = GetComponentInChildren<Animator>();
+        MuzzleFlashPistol.SetActive(false);
     }
 
     // Respond to inputs and update UI
@@ -182,6 +196,9 @@ public class CombatController : MonoBehaviour {
                             if (currentTime - reloadTime > reloadDelay[currentWeapon] && clipCurrent[currentWeapon] > 0)
                             {
                                 FireGun();
+                                FireAnim = true;
+                                StartCoroutine(ResetFireAndReload());
+                                MuzzleFlashPistol.SetActive(true);
                             }
                         }
                         else
@@ -205,6 +222,15 @@ public class CombatController : MonoBehaviour {
                 }
             }
         }
+        // Enable Sprinting Animation
+        if (playerController.isSprinting)
+        {
+            SprintingAnim = true;
+        }
+        else
+        {
+            SprintingAnim = false;
+        }
         
         // Detect reload
         if (Input.GetKey(KeyCode.R))
@@ -216,7 +242,8 @@ public class CombatController : MonoBehaviour {
                 if (currentTime - attackTime > combatDelay[currentWeapon] && currentTime - reloadTime > reloadDelay[currentWeapon])
                 {
                     ReloadGun();
-
+                    ReloadAnim = true;
+                    StartCoroutine(ResetFireAndReload());
                     reloadTime = currentTime;
                 }
             }
@@ -264,6 +291,18 @@ public class CombatController : MonoBehaviour {
             ammoDisplay.text = "";
         }
 	}
+
+    IEnumerator ResetFireAndReload()
+    {
+        yield return new WaitForEndOfFrame();
+
+        FireAnim = false;
+        ReloadAnim = false;
+
+        yield return new WaitForSeconds(0.12f);
+        MuzzleFlashPistol.SetActive(false);
+
+    }
 
     // Instantiate bullet and decrement ammo
     void FireGun()
@@ -365,5 +404,12 @@ public class CombatController : MonoBehaviour {
         waypoint.gameObject.SetActive(true);
 
         canExit = true;
+    }
+
+    void Update()
+    {
+        weaponAnimator.SetBool("Fire", FireAnim);
+        weaponAnimator.SetBool("Sprinting", SprintingAnim);
+        weaponAnimator.SetBool("Reload", ReloadAnim);
     }
 }
