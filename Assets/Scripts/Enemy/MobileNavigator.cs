@@ -8,8 +8,15 @@ public class MobileNavigator : MonoBehaviour {
     // Type of mobile enemy: 5 - Bandit, 6 - RedSoldier, 7 - BlackSoldier, 8 - SWAT
     public int type;
 
+    // Enemy Animation Controller Reference
+    public Animator EnemyAnim;
+    private bool mWalking = false;
+    private bool mIdle = false;
+    private bool mFire = false;
+
     // Navmesh agent component reference
     private NavMeshAgent agent;
+    
 
     // Player transform reference
     private Transform playerTransform;
@@ -69,6 +76,8 @@ public class MobileNavigator : MonoBehaviour {
     {
         agent = GetComponent<NavMeshAgent>();
 
+        EnemyAnim = GetComponentInChildren<Animator>();
+
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
 
         allWanderPoints = GameObject.FindGameObjectsWithTag("Wander Point");
@@ -81,6 +90,19 @@ public class MobileNavigator : MonoBehaviour {
         if (wanderReady && state == "Wandering")
         {
             StartCoroutine(Wander());
+
+            if (agent.velocity.magnitude > 0)
+            {
+                mWalking = true;
+                mFire = false;
+                mIdle = false;
+            }
+            else
+            {
+                mWalking = false;
+                mFire = true;
+                mIdle = false;
+            }
         }
         else if(pursueReady && state == "Pursuing")
         {
@@ -99,6 +121,10 @@ public class MobileNavigator : MonoBehaviour {
         {
             StartCoroutine(EnemyLOS());
         }
+
+        EnemyAnim.SetBool("Walking", mWalking);
+        EnemyAnim.SetBool("Idle", mIdle);
+        EnemyAnim.SetBool("Fire", mFire);
     }
 
     // Check if the player is within line of sight

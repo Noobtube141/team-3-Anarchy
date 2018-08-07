@@ -2025,7 +2025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb6b7b3247d76184aac5029d12b693e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: level
+  level: CS_LevelOne
   isMenuActive: 1
   isSettingsActive: 0
   menu: {fileID: 606861466}
