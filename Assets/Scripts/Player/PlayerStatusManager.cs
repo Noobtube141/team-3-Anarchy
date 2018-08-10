@@ -82,5 +82,7 @@ public class PlayerStatusManager : MonoBehaviour {
         pauseManager.SetActive(false);
 
         failStateManager.SetActive(true);
+
+        Cursor.lockState = CursorLockMode.None;
     }
 }

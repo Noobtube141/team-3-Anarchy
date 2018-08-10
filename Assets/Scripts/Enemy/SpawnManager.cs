@@ -31,12 +31,15 @@ public class SpawnManager : MonoBehaviour {
         yield return new WaitForSeconds(0.1f);
         
         enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-
-        print(enemyCount);
-
+        
         if (enemyCount <= lowerEnemyBound)
         {
-            waveNumber++;
+            print(enemyCount);
+
+            if (GameObject.FindGameObjectWithTag("Boss") == null)
+            {
+                waveNumber++;
+            }
 
             if (waveNumber <= waveMax)
             {
@@ -55,20 +58,5 @@ public class SpawnManager : MonoBehaviour {
                 }
             }
         }
-
-        // method definition if each enemy has a unique 'value'
-        /*enemyCount = 0;
-
-        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
-
-        foreach(GameObject enemy in allEnemies)
-        {
-            enemyCount += enemy.GetComponent<EnemyStatusManager>().value;
-        }
-
-        if(enemyCount < lowerEnemyBound)
-        {
-            //spawn waves
-        }*/
     }
 }

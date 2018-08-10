@@ -47,6 +47,7 @@ public class MobileNavigator : MonoBehaviour {
     // Size of line of sight (radius refers to half the size)
     public float losAngle;
     public float losLength;
+    private Vector3 enemySightDirection;
 
     // Firing range (stopping range of navmesh)
     public float firingRange;
@@ -132,7 +133,8 @@ public class MobileNavigator : MonoBehaviour {
     {
         Vector3 angleToPlayer = playerTransform.position - transform.position;
 
-        if (Vector3.Angle(angleToPlayer, transform.forward) < losAngle)
+        //if (Vector3.Angle(angleToPlayer, transform.forward) < losAngle)
+        if (Vector3.Angle(angleToPlayer, enemySightDirection) < losAngle)
         {
             Ray ray = new Ray(transform.position, angleToPlayer);
 
@@ -185,7 +187,9 @@ public class MobileNavigator : MonoBehaviour {
     IEnumerator Wander()
     {
         wanderReady = false;
-        
+
+        enemySightDirection = transform.forward;
+
         Vector3 position;
         
         FindRandomPosition(FindRandomWanderPoint(), wanderRadiusRand, out position);
@@ -274,6 +278,8 @@ public class MobileNavigator : MonoBehaviour {
     {
         pursueReady = false;
 
+        enemySightDirection = playerTransform.position - transform.position;
+
         transform.LookAt(new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z));
 
         agent.speed = pursuitSpeed;
@@ -290,10 +296,22 @@ public class MobileNavigator : MonoBehaviour {
             {
                 curentFireDelay = MaxFireDelay;
 
-                GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, bulletSpawn.rotation);
+                GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, Quaternion.LookRotation(playerTransform.position - bulletSpawn.position));
 
                 newBullet.GetComponent<BulletController>().type = type;
                 newBullet.GetComponent<BulletController>().canHurtPlayer = true;
+
+                if(type == 7)
+                {
+                    for(int i = 0; i < 5; i++)
+                    {
+                        newBullet = Instantiate(enemyBullet, bulletSpawn.position, Quaternion.LookRotation(playerTransform.position - bulletSpawn.position)
+                            * Quaternion.Euler(Random.Range(-3.25f, 3.25f), Random.Range(-3.25f, 3.25f), Random.Range(-3.25f, 3.25f)));
+
+                        newBullet.GetComponent<BulletController>().type = type;
+                        newBullet.GetComponent<BulletController>().canHurtPlayer = true;
+                    }
+                }
             }
         }
 

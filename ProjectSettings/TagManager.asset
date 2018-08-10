@@ -12,6 +12,12 @@ TagManager:
   - Waypoint
   - Enemy Weakness
   - Music Player
+  - schutzstaffel_a
+  - schutzstaffel_b
+  - wehrmacht_b
+  - wehrmacht_c
+  - wehrmacht_a
+  - Boss
   layers:
   - Default
   - TransparentFX

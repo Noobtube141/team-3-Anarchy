@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 114223032102552264}
   m_Layer: 2
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: Boss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14372bf7b60924c478afa9c60cfe65ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: Sniper
+  enemyType: Boss
   enemyHealth: 1
   isRandomlySpawned: 0
   randomRadius: 5

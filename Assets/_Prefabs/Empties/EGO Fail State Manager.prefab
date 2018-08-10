@@ -151,7 +151,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPaused: 0
   pauseMenu: {fileID: 0}
-  scene: menu
+  scene: NV_temp menu
   inventory: {fileID: 0}
 --- !u!114 &114690877436461548
 MonoBehaviour:
