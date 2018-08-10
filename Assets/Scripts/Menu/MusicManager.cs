@@ -10,6 +10,9 @@ public class MusicManager : MonoBehaviour {
     // EGOs storing audio sources
     public GameObject[] trackSources;
 
+    // Is the player currently in combat or idle?
+    private bool isInCombat = false;
+
     // Keep game object if there is not already another
     void Awake()
     {
@@ -35,8 +38,11 @@ public class MusicManager : MonoBehaviour {
     // Fade first track out and fade second track in
     public IEnumerator CrossFade(string type)
     {
-        if (type == "EnemiesEliminated")
+        // Menu track fades out, combat track fades in
+        if (type == "IntoGame")
         {
+            isInCombat = true;
+
             trackSources[1].GetComponent<AudioSource>().Play();
 
             trackSources[1].GetComponent<AudioSource>().volume = 0.0f;
@@ -50,7 +56,67 @@ public class MusicManager : MonoBehaviour {
                 yield return new WaitForSeconds(0.01f);
             }
 
-            trackSources[0].GetComponent<AudioSource>().Pause();
+            trackSources[0].GetComponent<AudioSource>().Stop();
         }
+        // Combat track fades out, idle track fades in
+        else if (type == "EnemiesEliminated")
+        {
+            isInCombat = false;
+
+            trackSources[2].GetComponent<AudioSource>().Play();
+
+            trackSources[2].GetComponent<AudioSource>().volume = 0.0f;
+
+            for (int i = 0; i < 30; i++)
+            {
+                trackSources[1].GetComponent<AudioSource>().volume = (30 - i) / 30.0f;
+
+                trackSources[2].GetComponent<AudioSource>().volume = i / 30.0f;
+
+                yield return new WaitForSeconds(0.01f);
+            }
+
+            trackSources[1].GetComponent<AudioSource>().Stop();
+        }
+        if (type == "IntoMenu")
+        {
+            int combatState;
+
+            if (isInCombat)
+            {
+                combatState = 1;
+            }
+            else
+            {
+                combatState = 2;
+            }
+
+            trackSources[0].GetComponent<AudioSource>().Play();
+
+            trackSources[0].GetComponent<AudioSource>().volume = 0.0f;
+
+            for (int i = 0; i < 30; i++)
+            {
+                trackSources[combatState].GetComponent<AudioSource>().volume = (30 - i) / 30.0f;
+
+                trackSources[0].GetComponent<AudioSource>().volume = i / 30.0f;
+
+                yield return new WaitForSeconds(0.01f);
+            }
+
+            trackSources[combatState].GetComponent<AudioSource>().Stop();
+
+            isInCombat = false;
+        }
+    }
+
+    // Switch from idle to combat music. Called at the start of a level
+    public void IdleToCombat()
+    {
+        isInCombat = true;
+
+        trackSources[2].GetComponent<AudioSource>().Stop();
+
+        trackSources[1].GetComponent<AudioSource>().Play();
     }
 }

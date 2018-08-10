@@ -72,6 +72,8 @@ public class CombatController : MonoBehaviour {
     public GameObject inventory;
     public bool isInventoryActive = false;
 
+    // Is it the last (third) level?
+    public bool isLastLevel = false;
 
     // Set component references
     private void Start()
@@ -99,7 +101,14 @@ public class CombatController : MonoBehaviour {
                 {
                     if (hit.collider.tag == "Exit" && hit.distance < 1.5f)
                     {
-                        SceneManager.LoadScene(scene);
+                        if (isLastLevel)
+                        {
+                            gameObject.GetComponent<PlayerStatusManager>().OnDeath(false);
+                        }
+                        else
+                        {
+                            SceneManager.LoadScene(scene);
+                        }
                     }
                 }
             }

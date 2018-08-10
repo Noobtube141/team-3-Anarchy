@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class PlayerStatusManager : MonoBehaviour {
 
+    // Player to be set ingame
+    public GameObject playerObject;
+
     // Player health and armour values
     public int playerHealth = 1000;
     public int playerArmour = 1000;
@@ -20,12 +23,28 @@ public class PlayerStatusManager : MonoBehaviour {
     public GameObject failStateManager;
     public GameObject pauseManager;
 
-    // Prevent the player from being destroyed between levels
-    private void Start()
+    // Ensure there is only one player that isn't destroyed between levels
+    void Awake()
     {
-        DontDestroyOnLoad(gameObject);
-    }
+        playerObject = GameObject.Find("PersistentPlayer");
 
+        if (playerObject == null)
+        {
+            playerObject = this.gameObject;
+
+            playerObject.name = "PersistentPlayer";
+
+            DontDestroyOnLoad(playerObject);
+        }
+        else
+        {
+            if (this.gameObject.name != "PersistentPlayer")
+            {
+                Destroy(this.gameObject);
+            }
+        }
+    }
+    
     // Update player UI
     void Update ()
     {
@@ -65,24 +84,27 @@ public class PlayerStatusManager : MonoBehaviour {
         // Detect death
         if (playerHealth <= 0.0f)
         {
-            OnDeath();
+            OnDeath(true);
         }
     }
 
     // On player death
-    private void OnDeath()
+    public void OnDeath(bool isDeath)
     {
-        playerHealth = 0;
+        if (isDeath)
+        {
+            playerHealth = 0;
+        }
 
         this.GetComponent<PlayerController>().enabled = false;
         this.GetComponent<CombatController>().enabled = false;
         this.GetComponent<CameraController>().enabled = false;
         transform.Find("player pov").GetComponent<CameraController>().enabled = false;
-
+        
         pauseManager.SetActive(false);
 
         failStateManager.SetActive(true);
-
-        Cursor.lockState = CursorLockMode.None;
+        
+        failStateManager.GetComponent<PauseManager>().isDeath = false;
     }
 }

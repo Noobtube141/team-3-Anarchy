@@ -10,14 +10,36 @@ public class PlayerStartPositioner : MonoBehaviour {
     // Should the player be desrtoyed? (set true for menu, set false for levels)
     public bool shouldPlayerBeDestroyed = false;
 
+    // Is the game transitioning from the menu to levels (set true for first level, else false)
+    public bool isEnteringLevels;
+
+    // Is this the third level? Allows the win state to be triggered
+    public bool isLastLevel;
+
 	void Start ()
     {
         if (shouldPlayerBeDestroyed)
         {
+            GameObject.FindGameObjectWithTag("Music Player").SendMessage("MusicToMenu");
+
             Destroy(GameObject.FindGameObjectWithTag("Player"));
         }
         else
         {
+            if (isEnteringLevels)
+            {
+                GameObject.FindGameObjectWithTag("Music Player").SendMessage("CrossFade", "IntoGame");
+            }
+            else
+            {
+                if (isLastLevel)
+                {
+                    GameObject.FindGameObjectWithTag("Player").GetComponent<CombatController>().isLastLevel = true;
+                }
+
+                GameObject.FindGameObjectWithTag("Music Player").SendMessage("IdleToCombat");
+            }
+
             GameObject.FindGameObjectWithTag("Player").transform.position = transform.position + playerOffset;
         }
 

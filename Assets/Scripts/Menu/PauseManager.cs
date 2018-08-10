@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour {
@@ -17,10 +18,34 @@ public class PauseManager : MonoBehaviour {
     // Radial inventory menu
     public GameObject inventory;
 
+    // Is this the pause menu or the fail/success state manager
+    public bool isPause;
+
+    // Is this the fail or success state?
+    public bool isDeath;
+
+    // The string to be displayed on fail/success
+    public string stateMessage = "You've died";
+
+    // The text component to use the above string
+    public Text stateText;
+
     // Make cursor invisible
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+
+        if (!isPause)
+        {
+            if (!isDeath)
+            {
+                stateMessage = "You win!";
+
+                stateText.text = stateMessage;
+
+                Cursor.lockState = CursorLockMode.None;
+            }
+        }
     }
 
     // Pause on pressing escape
@@ -29,7 +54,6 @@ public class PauseManager : MonoBehaviour {
         if (!isPaused)
         {
             if (Input.GetKeyDown(KeyCode.Escape))
-            //if (Input.GetKeyDown(KeyCode.Q))
             {
                 TogglePause();
 
@@ -42,7 +66,7 @@ public class PauseManager : MonoBehaviour {
     public void TogglePause()
     {
         isPaused = !isPaused;
-
+        
         if (isPaused)
         {
             Time.timeScale = 0;
@@ -88,6 +112,8 @@ public class PauseManager : MonoBehaviour {
     // Return to main menu on click
     public void ReturnToMenu()
     {
+        GameObject.FindGameObjectWithTag("Music Player").SendMessage("CrossFade", "IntoMenu");
+
         SceneManager.LoadScene(scene);
     }
 }
