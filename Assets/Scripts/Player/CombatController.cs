@@ -82,7 +82,7 @@ public class CombatController : MonoBehaviour {
     {
         playerController = gameObject.GetComponent<PlayerController>();
 
-        equipedWeapon = Instantiate(allWeapons[currentWeapon], gameObject.transform);
+        equipedWeapon = Instantiate(allWeapons[currentWeapon], Camera.main.transform);
 
         weaponAnimator = GetComponentInChildren<Animator>();
         MuzzleFlashPistol.SetActive(false);
@@ -425,7 +425,9 @@ public class CombatController : MonoBehaviour {
     {
         Destroy(equipedWeapon);
 
-        equipedWeapon = Instantiate(allWeapons[currentWeapon], gameObject.transform);
+        equipedWeapon = Instantiate(allWeapons[currentWeapon], Camera.main.transform);
+
+        weaponAnimator = GetComponentInChildren<Animator>();
     }
 
     // Increase weaponCount to allow access to knife
