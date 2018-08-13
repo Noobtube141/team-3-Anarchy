@@ -8088,7 +8088,8 @@ Prefab:
         type: 2}
       propertyPath: allAttacks.Array.data[5]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1479571252997694, guid: 15f575ac97854e547b501f1d221d39c2,
+        type: 2}
     - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
         type: 2}
       propertyPath: allWeapons.Array.data[5]
@@ -8098,7 +8099,12 @@ Prefab:
         type: 2}
       propertyPath: allWeapons.Array.data[0]
       value: 
-      objectReference: {fileID: 100182, guid: 2302f02daa4286447b51f037b008d0b7, type: 3}
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
+        type: 2}
+      propertyPath: allWeapons.Array.data[3]
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a735357629067a54591441a25d65bfc4, type: 2}
   m_IsPrefabParent: 0
