@@ -447,6 +447,8 @@ public class CombatController : MonoBehaviour {
     {
         waypoint.gameObject.SetActive(true);
 
+        waypoint.GetComponent<WaypointManager>().FindNewExit();
+
         canExit = true;
     }
 
