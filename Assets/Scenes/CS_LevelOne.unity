@@ -8094,16 +8094,21 @@ Prefab:
         type: 2}
       propertyPath: allWeapons.Array.data[5]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 100172, guid: fd4fe867db206474aba11a47f7119c01, type: 3}
     - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
         type: 2}
       propertyPath: allWeapons.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1348520894156126, guid: 4175f9bc31a8bc74a943b560b671bc9e,
+        type: 2}
     - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
         type: 2}
       propertyPath: allWeapons.Array.data[3]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1455086997698404, guid: a735357629067a54591441a25d65bfc4, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a735357629067a54591441a25d65bfc4, type: 2}
