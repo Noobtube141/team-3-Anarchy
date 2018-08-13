@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -308,6 +308,10 @@ Prefab:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 1907495722}
+    - target: {fileID: 1620088493437936, guid: 91292147854ab84498e11f02d859c40f, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 91292147854ab84498e11f02d859c40f, type: 2}
   m_IsPrefabParent: 0
@@ -9161,7 +9165,7 @@ MonoBehaviour:
   enemyCount: 0
   lowerEnemyBound: 3
   waveNumber: 0
-  waveMax: 4
+  waveMax: 1
 --- !u!4 &329304988
 Transform:
   m_ObjectHideFlags: 0
@@ -16725,7 +16729,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 494914649}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 18.926796, y: 1.2984706, z: -4.612691}
+  m_LocalPosition: {x: 18.933, y: 1.2984706, z: -4.612691}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5905782}
@@ -20192,7 +20196,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh25470
+  m_Name: pb_Mesh77772
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -20406,7 +20410,7 @@ MonoBehaviour:
   - {fileID: 1668875914779616, guid: 82ae40e94f959ef4bbbf3b16a20357ff, type: 2}
   - {fileID: 1482112696582814, guid: 6f2a355f8b87ae94d832b6638507b632, type: 2}
   - {fileID: 1591186360551002, guid: 1ec30b2724832dd469f3575ae54c0847, type: 2}
-  numberToSpawn: 020000000300000001000000
+  numberToSpawn: 010000000100000001000000
   spawnRange: 3
 --- !u!1 &551839710
 GameObject:
@@ -25674,7 +25678,7 @@ MonoBehaviour:
   - {fileID: 1668875914779616, guid: 82ae40e94f959ef4bbbf3b16a20357ff, type: 2}
   - {fileID: 1482112696582814, guid: 6f2a355f8b87ae94d832b6638507b632, type: 2}
   - {fileID: 1591186360551002, guid: 1ec30b2724832dd469f3575ae54c0847, type: 2}
-  numberToSpawn: 020000000300000001000000
+  numberToSpawn: 010000000100000001000000
   spawnRange: 3
 --- !u!1 &882742477
 GameObject:
@@ -38132,6 +38136,16 @@ Prefab:
       propertyPath: scene
       value: CS_LevelThreeV2
       objectReference: {fileID: 0}
+    - target: {fileID: 1455086997698404, guid: a735357629067a54591441a25d65bfc4, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
+        type: 2}
+      propertyPath: allWeapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 1348520894156126, guid: 4175f9bc31a8bc74a943b560b671bc9e,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a735357629067a54591441a25d65bfc4, type: 2}
   m_IsPrefabParent: 0
@@ -61947,7 +61961,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh134194
+  m_Name: pb_Mesh110656
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -68279,7 +68293,7 @@ MonoBehaviour:
   - {fileID: 1668875914779616, guid: 82ae40e94f959ef4bbbf3b16a20357ff, type: 2}
   - {fileID: 1482112696582814, guid: 6f2a355f8b87ae94d832b6638507b632, type: 2}
   - {fileID: 1591186360551002, guid: 1ec30b2724832dd469f3575ae54c0847, type: 2}
-  numberToSpawn: 030000000200000001000000
+  numberToSpawn: 010000000100000001000000
   spawnRange: 3
 --- !u!43 &1823800151
 Mesh:
@@ -70178,7 +70192,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh73148
+  m_Name: pb_Mesh76824
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -73515,7 +73529,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh73412
+  m_Name: pb_Mesh77094
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -75814,7 +75828,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh72876
+  m_Name: pb_Mesh76548
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -84686,7 +84700,7 @@ MonoBehaviour:
   - {fileID: 1668875914779616, guid: 82ae40e94f959ef4bbbf3b16a20357ff, type: 2}
   - {fileID: 1482112696582814, guid: 6f2a355f8b87ae94d832b6638507b632, type: 2}
   - {fileID: 1591186360551002, guid: 1ec30b2724832dd469f3575ae54c0847, type: 2}
-  numberToSpawn: 030000000200000001000000
+  numberToSpawn: 010000000100000001000000
   spawnRange: 3
 --- !u!43 &2135088046
 Mesh:

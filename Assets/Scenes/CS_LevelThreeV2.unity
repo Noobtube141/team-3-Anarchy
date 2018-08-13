@@ -7602,12 +7602,29 @@ Prefab:
         type: 2}
       propertyPath: allWeapons.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1348520894156126, guid: 4175f9bc31a8bc74a943b560b671bc9e,
+        type: 2}
     - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
         type: 2}
       propertyPath: allWeapons.Array.data[2]
       value: 
-      objectReference: {fileID: 100000, guid: fb8042f5d06c2cb4f8ea60f62760c257, type: 3}
+      objectReference: {fileID: 1391631669070382, guid: 6bdc569a7df46b243aa59f11b325e89e,
+        type: 2}
+    - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
+        type: 2}
+      propertyPath: allWeapons.Array.data[3]
+      value: 
+      objectReference: {fileID: 1391631669070382, guid: 6bdc569a7df46b243aa59f11b325e89e,
+        type: 2}
+    - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
+        type: 2}
+      propertyPath: isLastLevel
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1455086997698404, guid: a735357629067a54591441a25d65bfc4, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a735357629067a54591441a25d65bfc4, type: 2}
   m_IsPrefabParent: 0
@@ -11827,6 +11844,31 @@ Prefab:
         type: 2}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 136198265677341824, guid: 6381f83cdd1c4f645a2b553e2b4e5b97,
+        type: 2}
+      propertyPath: m_Radius
+      value: 1.1281404
+      objectReference: {fileID: 0}
+    - target: {fileID: 136198265677341824, guid: 6381f83cdd1c4f645a2b553e2b4e5b97,
+        type: 2}
+      propertyPath: m_Center.x
+      value: -0.005022764
+      objectReference: {fileID: 0}
+    - target: {fileID: 136198265677341824, guid: 6381f83cdd1c4f645a2b553e2b4e5b97,
+        type: 2}
+      propertyPath: m_Height
+      value: 2.506979
+      objectReference: {fileID: 0}
+    - target: {fileID: 136198265677341824, guid: 6381f83cdd1c4f645a2b553e2b4e5b97,
+        type: 2}
+      propertyPath: m_Center.y
+      value: 0.2520295
+      objectReference: {fileID: 0}
+    - target: {fileID: 136198265677341824, guid: 6381f83cdd1c4f645a2b553e2b4e5b97,
+        type: 2}
+      propertyPath: m_Center.z
+      value: 0.03440571
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6381f83cdd1c4f645a2b553e2b4e5b97, type: 2}
@@ -18454,7 +18496,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-253500
+  m_Name: pb_Mesh114046
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -23881,6 +23923,11 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114275356408703870, guid: bd189f85d29566a4ea5e9eee52d82635,
+        type: 2}
+      propertyPath: isLastLevel
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd189f85d29566a4ea5e9eee52d82635, type: 2}
   m_IsPrefabParent: 0
@@ -24101,6 +24148,10 @@ Prefab:
     - target: {fileID: 4954987124109586, guid: 25bc61dc8b3a85b439af98c454c043ad, type: 2}
       propertyPath: m_RootOrder
       value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1978734329516144, guid: 25bc61dc8b3a85b439af98c454c043ad, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 25bc61dc8b3a85b439af98c454c043ad, type: 2}
