@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/NV_player control test 2.unity
-    guid: 7a70930bc3fb3d042ababa7a28d61dca
-  - enabled: 1
     path: Assets/Scenes/NV_temp menu.unity
     guid: a3236421620efcd4c8ed43a1ce4d693b
+  - enabled: 0
+    path: Assets/Scenes/NV_player control test 2.unity
+    guid: 7a70930bc3fb3d042ababa7a28d61dca
   - enabled: 1
     path: Assets/Scenes/CS_LevelOne.unity
     guid: b02670d0ae6a94c47a5dac9d05461d8a
