@@ -29,6 +29,11 @@ public class PlayerStartPositioner : MonoBehaviour {
         }
         else
         {
+            if(GameObject.FindObjectOfType<WaypointManager>() != null)
+            {
+                GameObject.FindObjectOfType<WaypointManager>().gameObject.SetActive(false);
+            }
+
             if (isEnteringLevels)
             {
                 GameObject.FindGameObjectWithTag("Music Player").SendMessage("CrossFade", "IntoGame");
