@@ -321,9 +321,9 @@ MonoBehaviour:
   allWeapons:
   - {fileID: 100182, guid: 2302f02daa4286447b51f037b008d0b7, type: 3}
   - {fileID: 0}
-  - {fileID: 100000, guid: 76ed8d99226b527449ae2453cac646a5, type: 3}
-  - {fileID: 100000, guid: 986daea34dd8d774d9c174b863cda334, type: 3}
-  - {fileID: 100000, guid: 9c702815e3539364eacd64eb2ffbd5d0, type: 3}
+  - {fileID: 1391631669070382, guid: 6bdc569a7df46b243aa59f11b325e89e, type: 2}
+  - {fileID: 1882885230849600, guid: 152d001f9edfac44a9854d3f3690f798, type: 2}
+  - {fileID: 1520468597982876, guid: 0c224f835a8bed54d84b34a835e21a9b, type: 2}
   - {fileID: 100000, guid: b2808c5c6a373e7438d4d9cc84d1e4c1, type: 3}
   - {fileID: 0}
   - {fileID: 0}
