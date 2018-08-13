@@ -11,6 +11,8 @@ public class CombatController : MonoBehaviour {
     public GameObject[] allWeapons;
     public GameObject[] allAttacks;
 
+    private GameObject equipedWeapon;
+
     // Animator Reference
     private Animator weaponAnimator;
 
@@ -79,6 +81,9 @@ public class CombatController : MonoBehaviour {
     private void Start()
     {
         playerController = gameObject.GetComponent<PlayerController>();
+
+        equipedWeapon = Instantiate(allWeapons[currentWeapon], gameObject.transform);
+
         weaponAnimator = GetComponentInChildren<Animator>();
         MuzzleFlashPistol.SetActive(false);
     }
@@ -136,6 +141,8 @@ public class CombatController : MonoBehaviour {
                     {
                         currentWeapon -= (weaponCount + 1);
                     }
+
+                    SwapWeapon();
                 }
             }
 
@@ -143,32 +150,46 @@ public class CombatController : MonoBehaviour {
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 currentWeapon = 0;
+
+                SwapWeapon();
             }
             else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 currentWeapon = 1;
+
+                SwapWeapon();
             }
             else if (Input.GetKeyDown(KeyCode.Alpha3))
             {
                 currentWeapon = 2;
+
+                SwapWeapon();
             }
             else if (Input.GetKeyDown(KeyCode.Alpha4))
             {
                 currentWeapon = 3;
+
+                SwapWeapon();
             }
             else if (Input.GetKeyDown(KeyCode.Alpha5))
             {
                 currentWeapon = 4;
+
+                SwapWeapon();
             }
             else if (Input.GetKeyDown(KeyCode.Alpha6))
             {
                 currentWeapon = 5;
+
+                SwapWeapon();
             }
             else if (Input.GetKeyDown(KeyCode.Alpha7))
             {
                 if (weaponCount > 5)
                 {
                     currentWeapon = 6;
+
+                    SwapWeapon();
                 }
             }
             else if (Input.GetKeyDown(KeyCode.Alpha8))
@@ -176,6 +197,8 @@ public class CombatController : MonoBehaviour {
                 if (weaponCount > 6)
                 {
                     currentWeapon = 7;
+
+                    SwapWeapon();
                 }
             }
 
@@ -392,7 +415,17 @@ public class CombatController : MonoBehaviour {
         if(number <= weaponCount)
         {
             currentWeapon = number;
+
+            SwapWeapon();
         }
+    }
+
+    // Swap weapon prefabs
+    void SwapWeapon()
+    {
+        Destroy(equipedWeapon);
+
+        equipedWeapon = Instantiate(allWeapons[currentWeapon], gameObject.transform);
     }
 
     // Increase weaponCount to allow access to knife

@@ -278,6 +278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fa7699b9b2ab30469b29825c11feb12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObject: {fileID: 0}
   playerHealth: 1000
   playerArmour: 1000
   healthBar: {fileID: 0}
@@ -300,6 +301,7 @@ MonoBehaviour:
   isRotatingHorizontally: 0
   mouseSensitivityX: 0
   mouseSensitivityY: 0
+  mouseInversion: 0
   minVerticalRotation: -45
   maxVerticalRotation: 45
   rotationHorizontal: 0
@@ -317,12 +319,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allWeapons:
+  - {fileID: 100182, guid: 2302f02daa4286447b51f037b008d0b7, type: 3}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 100000, guid: 76ed8d99226b527449ae2453cac646a5, type: 3}
+  - {fileID: 100000, guid: 986daea34dd8d774d9c174b863cda334, type: 3}
+  - {fileID: 100000, guid: 9c702815e3539364eacd64eb2ffbd5d0, type: 3}
+  - {fileID: 100000, guid: b2808c5c6a373e7438d4d9cc84d1e4c1, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   allAttacks:
@@ -334,6 +336,7 @@ MonoBehaviour:
   - {fileID: 1479571252997694, guid: 15f575ac97854e547b501f1d221d39c2, type: 2}
   - {fileID: 1479571252997694, guid: 15f575ac97854e547b501f1d221d39c2, type: 2}
   - {fileID: 1479571252997694, guid: 15f575ac97854e547b501f1d221d39c2, type: 2}
+  MuzzleFlashPistol: {fileID: 0}
   currentWeapon: 0
   weaponCount: 5
   combatDelay:
@@ -386,6 +389,7 @@ MonoBehaviour:
   scene: 
   inventory: {fileID: 0}
   isInventoryActive: 0
+  isLastLevel: 0
 --- !u!114 &114286929072202778
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -415,6 +419,7 @@ MonoBehaviour:
   - {fileID: 1479571252997694, guid: 15f575ac97854e547b501f1d221d39c2, type: 2}
   - {fileID: 1479571252997694, guid: 15f575ac97854e547b501f1d221d39c2, type: 2}
   - {fileID: 1479571252997694, guid: 15f575ac97854e547b501f1d221d39c2, type: 2}
+  MuzzleFlashPistol: {fileID: 0}
   currentWeapon: 0
   weaponCount: 5
   combatDelay:
@@ -452,6 +457,7 @@ MonoBehaviour:
   scene: 
   inventory: {fileID: 0}
   isInventoryActive: 0
+  isLastLevel: 0
 --- !u!114 &114347646102558036
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -466,6 +472,7 @@ MonoBehaviour:
   isRotatingHorizontally: 1
   mouseSensitivityX: 0
   mouseSensitivityY: 0
+  mouseInversion: 0
   minVerticalRotation: -45
   maxVerticalRotation: 45
   rotationHorizontal: 0

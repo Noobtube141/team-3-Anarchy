@@ -16,6 +16,9 @@ public class PlayerStartPositioner : MonoBehaviour {
     // Is this the third level? Allows the win state to be triggered
     public bool isLastLevel;
 
+    // Next level to load
+    public string nextLevel;
+
 	void Start ()
     {
         if (shouldPlayerBeDestroyed)
@@ -41,6 +44,8 @@ public class PlayerStartPositioner : MonoBehaviour {
             }
 
             GameObject.FindGameObjectWithTag("Player").transform.position = transform.position + playerOffset;
+
+            GameObject.FindGameObjectWithTag("Player").GetComponent<CombatController>().scene = nextLevel;
         }
 
         Destroy(gameObject);
