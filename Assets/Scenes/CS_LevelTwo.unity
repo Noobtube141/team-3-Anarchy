@@ -29505,7 +29505,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4091945007074032, guid: bd189f85d29566a4ea5e9eee52d82635, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 8.598
+      value: 8.26
       objectReference: {fileID: 0}
     - target: {fileID: 4091945007074032, guid: bd189f85d29566a4ea5e9eee52d82635, type: 2}
       propertyPath: m_LocalPosition.y
@@ -61821,7 +61821,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh24220
+  m_Name: pb_Mesh34506
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -72572,6 +72572,11 @@ Prefab:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 1907495722}
+    - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
+        type: 2}
+      propertyPath: scene
+      value: LevelThreeV2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a735357629067a54591441a25d65bfc4, type: 2}
   m_IsPrefabParent: 0

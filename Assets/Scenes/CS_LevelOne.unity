@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesToSpawn:
   - {fileID: 1896784273489762, guid: b505311806c7cd142a8187b2fc4054f0, type: 2}
-  numberToSpawn: 04000000
+  numberToSpawn: 01000000
   spawnRange: 2
 --- !u!1001 &3537818
 Prefab:
@@ -8079,6 +8079,11 @@ Prefab:
       propertyPath: combatDelay.Array.data[4]
       value: 0.075
       objectReference: {fileID: 0}
+    - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
+        type: 2}
+      propertyPath: scene
+      value: CS_LevelTwo
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a735357629067a54591441a25d65bfc4, type: 2}
   m_IsPrefabParent: 0
@@ -12645,7 +12650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesToSpawn:
   - {fileID: 1896784273489762, guid: b505311806c7cd142a8187b2fc4054f0, type: 2}
-  numberToSpawn: 04000000
+  numberToSpawn: 01000000
   spawnRange: 2
 --- !u!43 &437124706
 Mesh:
@@ -14587,7 +14592,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh-1532
+  m_Name: pb_Mesh-1642
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2
@@ -32909,7 +32914,7 @@ MonoBehaviour:
   enemyCount: 0
   lowerEnemyBound: 2
   waveNumber: 0
-  waveMax: 3
+  waveMax: 1
 --- !u!4 &1276205460
 Transform:
   m_ObjectHideFlags: 0
@@ -33196,7 +33201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesToSpawn:
   - {fileID: 1896784273489762, guid: b505311806c7cd142a8187b2fc4054f0, type: 2}
-  numberToSpawn: 04000000
+  numberToSpawn: 01000000
   spawnRange: 2
 --- !u!1 &1302693557
 GameObject:
@@ -34972,6 +34977,11 @@ Prefab:
       propertyPath: scene
       value: NV_temp menu
       objectReference: {fileID: 0}
+    - target: {fileID: 114628009740894158, guid: 5373248652692d64b85e4fb1ddc363f0,
+        type: 2}
+      propertyPath: inventory
+      value: 
+      objectReference: {fileID: 1620136799}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5373248652692d64b85e4fb1ddc363f0, type: 2}
   m_IsPrefabParent: 0

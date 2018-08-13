@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/NV_temp menu.unity
     guid: a3236421620efcd4c8ed43a1ce4d693b
   - enabled: 1
+    path: Assets/Scenes/CS_LevelOne.unity
+    guid: b02670d0ae6a94c47a5dac9d05461d8a
+  - enabled: 1
     path: Assets/Scenes/CS_LevelTwo.unity
     guid: 32024fddd93c609459b2f0d199b1fc81
   m_configObjects: {}
