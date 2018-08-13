@@ -56,6 +56,8 @@ public class MusicManager : MonoBehaviour {
                 yield return new WaitForSeconds(0.01f);
             }
 
+            trackSources[0].GetComponent<AudioSource>().volume = 0.0f;
+
             trackSources[0].GetComponent<AudioSource>().Stop();
         }
         // Combat track fades out, idle track fades in
@@ -75,6 +77,8 @@ public class MusicManager : MonoBehaviour {
 
                 yield return new WaitForSeconds(0.01f);
             }
+
+            trackSources[1].GetComponent<AudioSource>().volume = 0.0f;
 
             trackSources[1].GetComponent<AudioSource>().Stop();
         }
@@ -103,6 +107,8 @@ public class MusicManager : MonoBehaviour {
 
                 yield return new WaitForSeconds(0.01f);
             }
+
+            trackSources[combatState].GetComponent<AudioSource>().volume = 0.0f;
 
             trackSources[combatState].GetComponent<AudioSource>().Stop();
 

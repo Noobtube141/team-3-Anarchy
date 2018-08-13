@@ -21,7 +21,20 @@ public class PickupManager : MonoBehaviour {
 	// Set auto delete
 	void Start ()
     {
-        if(!isKnife || !isShovel)
+        if (isKnife)
+        {
+            if(GameObject.FindGameObjectWithTag("Player").GetComponent<CombatController>().weaponCount == 6)
+            {
+                GameObject.FindGameObjectWithTag("Shovel").SetActive(true);
+
+                Destroy(gameObject);
+            }
+        }
+        else if (isShovel)
+        {
+            // Nothing
+        }
+        else
         {
             Destroy(gameObject, lifetime);
         }

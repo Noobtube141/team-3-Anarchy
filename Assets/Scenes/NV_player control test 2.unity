@@ -2022,6 +2022,16 @@ Prefab:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 747674138}
+    - target: {fileID: 114490458855277066, guid: 5373248652692d64b85e4fb1ddc363f0,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 773448814}
+    - target: {fileID: 114490458855277066, guid: 5373248652692d64b85e4fb1ddc363f0,
+        type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ReturnToMenu
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5373248652692d64b85e4fb1ddc363f0, type: 2}
   m_IsPrefabParent: 0
@@ -2904,6 +2914,12 @@ Prefab:
       propertyPath: scene
       value: CS_LevelTwo
       objectReference: {fileID: 0}
+    - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
+        type: 2}
+      propertyPath: allWeapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 1348520894156126, guid: 4175f9bc31a8bc74a943b560b671bc9e,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a735357629067a54591441a25d65bfc4, type: 2}
   m_IsPrefabParent: 0
@@ -3071,7 +3087,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: f9984157be7b33f4d9570a1181d014b7, type: 2}
+  - {fileID: 2100000, guid: 721e3c17271b5c04fa30f75fa986be67, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3680,7 +3696,7 @@ Prefab:
     - target: {fileID: 82924019503818068, guid: 25bc61dc8b3a85b439af98c454c043ad,
         type: 2}
       propertyPath: m_PlayOnAwake
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1978734329516144, guid: 25bc61dc8b3a85b439af98c454c043ad, type: 2}
       propertyPath: m_IsActive
@@ -3824,7 +3840,7 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RenderingLayerMask: 4294967295
   m_Materials:
-  - {fileID: 2100000, guid: f9984157be7b33f4d9570a1181d014b7, type: 2}
+  - {fileID: 2100000, guid: b772f3918d4113742a75219c4106235b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4062,7 +4078,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1714904988
 Transform:
   m_ObjectHideFlags: 0
