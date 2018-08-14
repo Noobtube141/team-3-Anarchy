@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour {
-
+    
     // Image button references
     public Image[] imageButtons;
 
@@ -20,7 +20,7 @@ public class InventoryManager : MonoBehaviour {
 
     // Left click close corooutine
     private Coroutine closeCoroutine;
-
+    
     // Set hit alpha minimum
     private void Start()
     {

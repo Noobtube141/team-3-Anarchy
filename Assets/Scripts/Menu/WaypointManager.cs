@@ -9,7 +9,7 @@ public class WaypointManager : MonoBehaviour {
     private RectTransform imagePos;
     private Image waypoint;
 
-    public Transform exitObject;
+    private Transform exitObject;
     private Transform playerTransform;
     
     // Set component references
@@ -34,5 +34,13 @@ public class WaypointManager : MonoBehaviour {
         {
             waypoint.fillAmount = 0;
         }
+    }
+
+    // Find new exit object
+    public void FindNewExit()
+    {
+        print("test");
+
+        exitObject = GameObject.FindGameObjectWithTag("Exit").GetComponent<Transform>();
     }
 }
