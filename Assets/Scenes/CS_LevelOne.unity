@@ -36072,16 +36072,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 114760629445724842, guid: 5373248652692d64b85e4fb1ddc363f0,
-        type: 2}
-      propertyPath: inventory
-      value: 
-      objectReference: {fileID: 1620136799}
-    - target: {fileID: 114760629445724842, guid: 5373248652692d64b85e4fb1ddc363f0,
-        type: 2}
-      propertyPath: scene
-      value: NV_temp menu
-      objectReference: {fileID: 0}
     - target: {fileID: 114628009740894158, guid: 5373248652692d64b85e4fb1ddc363f0,
         type: 2}
       propertyPath: inventory
