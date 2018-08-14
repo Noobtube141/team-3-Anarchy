@@ -34932,21 +34932,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 114760629445724842, guid: 5373248652692d64b85e4fb1ddc363f0,
-        type: 2}
-      propertyPath: inventory
-      value: 
-      objectReference: {fileID: 1620136799}
-    - target: {fileID: 114760629445724842, guid: 5373248652692d64b85e4fb1ddc363f0,
-        type: 2}
-      propertyPath: scene
-      value: NV_temp menu
-      objectReference: {fileID: 0}
     - target: {fileID: 114628009740894158, guid: 5373248652692d64b85e4fb1ddc363f0,
         type: 2}
       propertyPath: inventory
       value: 
       objectReference: {fileID: 1620136799}
+    - target: {fileID: 114066112128598478, guid: 5373248652692d64b85e4fb1ddc363f0,
+        type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 7e8c0813969b14e4193e7c300abd0a81,
+        type: 3}
+    - target: {fileID: 1566247202484056, guid: 5373248652692d64b85e4fb1ddc363f0, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5373248652692d64b85e4fb1ddc363f0, type: 2}
   m_IsPrefabParent: 0
