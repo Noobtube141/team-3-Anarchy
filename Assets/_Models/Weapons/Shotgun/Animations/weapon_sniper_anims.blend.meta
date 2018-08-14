@@ -1,0 +1,225 @@
+fileFormatVersion: 2
+guid: ef984eb759e83ad4599f63ae482c2e93
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: broke_s_css
+    100002: camera-center-point
+    100004: camera_controller
+    100006: camera_target
+    100008: camera_target_0
+    100010: Cube
+    100012: Hands
+    100014: l_armtwist_1
+    100016: l_armtwist_2
+    100018: l_armtwist_3
+    100020: l_armtwist_4
+    100022: l_forearm
+    100024: l_index_low
+    100026: l_index_mid
+    100028: l_index_tip
+    100030: l_middle_low
+    100032: l_middle_mid
+    100034: l_middle_tip
+    100036: l_pinky_low
+    100038: l_pinky_mid
+    100040: l_pinky_tip
+    100042: l_ring_low
+    100044: l_ring_mid
+    100046: l_ring_tip
+    100048: l_thumb_low
+    100050: l_thumb_mid
+    100052: l_thumb_tip
+    100054: l_upperarm
+    100056: l_wrist
+    100058: non-ts_css
+    100060: r_armtwist_1
+    100062: r_armtwist_2
+    100064: r_armtwist_3
+    100066: r_armtwist_4
+    100068: r_forearm
+    100070: r_index_low
+    100072: r_index_mid
+    100074: r_index_tip
+    100076: r_middle_low
+    100078: r_middle_mid
+    100080: r_middle_tip
+    100082: r_pinky_low
+    100084: r_pinky_mid
+    100086: r_pinky_tip
+    100088: r_ring_low
+    100090: r_ring_mid
+    100092: r_ring_tip
+    100094: r_thumb_low
+    100096: r_thumb_mid
+    100098: r_thumb_tip
+    100100: r_upperarm
+    100102: r_wrist
+    100104: root
+    100106: slide
+    100108: watch
+    100110: weapon
+    100112: //RootNode
+    400000: broke_s_css
+    400002: camera-center-point
+    400004: camera_controller
+    400006: camera_target
+    400008: camera_target_0
+    400010: Cube
+    400012: Hands
+    400014: l_armtwist_1
+    400016: l_armtwist_2
+    400018: l_armtwist_3
+    400020: l_armtwist_4
+    400022: l_forearm
+    400024: l_index_low
+    400026: l_index_mid
+    400028: l_index_tip
+    400030: l_middle_low
+    400032: l_middle_mid
+    400034: l_middle_tip
+    400036: l_pinky_low
+    400038: l_pinky_mid
+    400040: l_pinky_tip
+    400042: l_ring_low
+    400044: l_ring_mid
+    400046: l_ring_tip
+    400048: l_thumb_low
+    400050: l_thumb_mid
+    400052: l_thumb_tip
+    400054: l_upperarm
+    400056: l_wrist
+    400058: non-ts_css
+    400060: r_armtwist_1
+    400062: r_armtwist_2
+    400064: r_armtwist_3
+    400066: r_armtwist_4
+    400068: r_forearm
+    400070: r_index_low
+    400072: r_index_mid
+    400074: r_index_tip
+    400076: r_middle_low
+    400078: r_middle_mid
+    400080: r_middle_tip
+    400082: r_pinky_low
+    400084: r_pinky_mid
+    400086: r_pinky_tip
+    400088: r_ring_low
+    400090: r_ring_mid
+    400092: r_ring_tip
+    400094: r_thumb_low
+    400096: r_thumb_mid
+    400098: r_thumb_tip
+    400100: r_upperarm
+    400102: r_wrist
+    400104: root
+    400106: slide
+    400108: watch
+    400110: weapon
+    400112: //RootNode
+    2100000: shadeless
+    2100002: unnamed
+    2100004: t_phoenix
+    2100006: v_hands
+    2300000: camera-center-point
+    2300002: camera_target
+    3300000: camera-center-point
+    3300002: camera_target
+    4300000: camera-center-point
+    4300002: camera_target
+    4300004: broke_s_css
+    4300006: non-ts_css
+    4300008: Cube
+    7400000: Default Take
+    7400002: weapon_sniper_fire
+    7400004: weapon_sniper_idle
+    7400006: weapon_sniper_reload
+    7400008: weapon_sniper_sprint
+    7400010: weapon_sniper_sprint_in
+    7400012: weapon_sniper_sprint_out
+    9500000: //RootNode
+    13700000: broke_s_css
+    13700002: Cube
+    13700004: non-ts_css
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
