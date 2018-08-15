@@ -41,6 +41,8 @@ public class MusicManager : MonoBehaviour {
         // Menu track fades out, combat track fades in
         if (type == "IntoGame")
         {
+            print(type);
+
             isInCombat = true;
 
             trackSources[1].GetComponent<AudioSource>().Play();
@@ -63,6 +65,8 @@ public class MusicManager : MonoBehaviour {
         // Combat track fades out, idle track fades in
         else if (type == "EnemiesEliminated")
         {
+            print(type);
+
             isInCombat = false;
 
             trackSources[2].GetComponent<AudioSource>().Play();
@@ -84,6 +88,8 @@ public class MusicManager : MonoBehaviour {
         }
         if (type == "IntoMenu")
         {
+            print(type);
+
             int combatState;
 
             if (isInCombat)
@@ -119,6 +125,8 @@ public class MusicManager : MonoBehaviour {
     // Switch from idle to combat music. Called at the start of a level
     public void IdleToCombat()
     {
+        print("swap test");
+
         isInCombat = true;
 
         trackSources[2].GetComponent<AudioSource>().Stop();
