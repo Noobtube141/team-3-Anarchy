@@ -13,7 +13,12 @@ ModelImporter:
     7400000: Default Take
     9500000: //RootNode
     2186277476908879412: ImportLogs
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material_001__MosinNagantUV_jpg
+    second: {fileID: 2100000, guid: 373beab4b59246649a53188ed6f55406, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

@@ -6,13 +6,20 @@ ModelImporter:
     100000: //RootNode
     400000: //RootNode
     2100000: unnamed
+    2100002: Material__Complete_Shotgun
+    2100004: Material__M30_Luftwaffe_UV_jpg
     2300000: //RootNode
     3300000: //RootNode
     4300000: m30
     7400000: Default Take
     9500000: //RootNode
     2186277476908879412: ImportLogs
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material__Complete_Shotgun
+    second: {fileID: 2100000, guid: 8c141325ee10b60438a643447580dac1, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

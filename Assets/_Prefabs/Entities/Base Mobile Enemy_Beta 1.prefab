@@ -1738,7 +1738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 6
-  agent: {fileID: 0}
+  EnemyAnim: {fileID: 0}
   state: Wandering
   wanderSpeed: 7.5
   pursuitSpeed: 8.75
