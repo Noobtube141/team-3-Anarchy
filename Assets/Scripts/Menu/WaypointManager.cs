@@ -39,8 +39,6 @@ public class WaypointManager : MonoBehaviour {
     // Find new exit object
     public void FindNewExit()
     {
-        print("test");
-
         exitObject = GameObject.FindGameObjectWithTag("Exit").GetComponent<Transform>();
     }
 }

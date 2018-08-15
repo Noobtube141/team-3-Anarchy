@@ -33,8 +33,19 @@ public class PauseManager : MonoBehaviour {
     // Make cursor invisible
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        if (isPause)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+    }
 
+    // Update for fail/success message
+    private void OnEnable()
+    {
+        Cursor.lockState = CursorLockMode.None;
+
+        Cursor.visible = true;
+        
         if (!isPause)
         {
             if (!isDeath)

@@ -52,7 +52,14 @@ public class PlayerStatusManager : MonoBehaviour {
         healthBar.fillAmount = playerHealth / 1000.0f;
         armourBar.fillAmount = playerArmour / 1000.0f;
 
-        healthValue.text = Mathf.FloorToInt(playerHealth / 10.0f).ToString();
+        if(playerHealth > 0)
+        {
+            healthValue.text = Mathf.Clamp(Mathf.FloorToInt(playerHealth / 10.0f), 1, 1000).ToString();
+        }
+        else
+        {
+            healthValue.text = "0";
+        }
         armourValue.text = Mathf.FloorToInt(playerArmour / 10.0f).ToString();
     }
 
@@ -103,8 +110,8 @@ public class PlayerStatusManager : MonoBehaviour {
         
         pauseManager.SetActive(false);
 
+        failStateManager.GetComponent<PauseManager>().isDeath = isDeath;
+
         failStateManager.SetActive(true);
-        
-        failStateManager.GetComponent<PauseManager>().isDeath = false;
     }
 }

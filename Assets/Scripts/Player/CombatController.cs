@@ -89,7 +89,7 @@ public class CombatController : MonoBehaviour {
     }
 
     // Respond to inputs and update UI
-    void FixedUpdate ()
+    void Update ()
     {
         // Exit on clicking exit object
         if (canExit)
@@ -109,6 +109,8 @@ public class CombatController : MonoBehaviour {
                         if (isLastLevel)
                         {
                             gameObject.GetComponent<PlayerStatusManager>().OnDeath(false);
+                            
+                            return;
                         }
                         else
                         {
@@ -322,7 +324,11 @@ public class CombatController : MonoBehaviour {
         {
             ammoDisplay.text = "";
         }
-	}
+
+        weaponAnimator.SetBool("Fire", FireAnim);
+        weaponAnimator.SetBool("Sprinting", SprintingAnim);
+        weaponAnimator.SetBool("Reload", ReloadAnim);
+    }
 
     IEnumerator ResetFireAndReload()
     {
@@ -452,10 +458,10 @@ public class CombatController : MonoBehaviour {
         canExit = true;
     }
 
-    void Update()
+    /*void Update()
     {
         weaponAnimator.SetBool("Fire", FireAnim);
         weaponAnimator.SetBool("Sprinting", SprintingAnim);
         weaponAnimator.SetBool("Reload", ReloadAnim);
-    }
+    }*/
 }

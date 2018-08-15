@@ -14,6 +14,7 @@ public class EnemyStatusManager : MonoBehaviour {
 
     // Enemy health
     public int enemyHealth = 1;
+    private bool isdead = false;
 
     // Random spawn range
     public bool isRandomlySpawned;
@@ -89,7 +90,12 @@ public class EnemyStatusManager : MonoBehaviour {
 
         if(enemyHealth <= 0)
         {
-            EnemyOnDeath(type);
+            if (!isdead)
+            {
+                EnemyOnDeath(type);
+
+                isdead = true;
+            }
         }
         else
         {
@@ -112,7 +118,7 @@ public class EnemyStatusManager : MonoBehaviour {
         GameObject.Find("EGO Spawn Manager").GetComponent<SpawnManager>().CallCountEnemies();
 
         // Drop pickups if not stationary
-        if(enemyType != "Sniper" || enemyType != "Boss")
+        if(enemyType != "Sniper" && enemyType != "Boss")
         {
             CalculateEnemyDrop(type);
         }
@@ -131,25 +137,12 @@ public class EnemyStatusManager : MonoBehaviour {
 
         float distanceToPlayer = Vector3.Distance(transform.position, statusManager.gameObject.GetComponent<Transform>().position);
 
-        float dropValue;
-
-        if (distanceToPlayer <= 5)
-        {
-            dropValue = 1;
-        }
-        else if (distanceToPlayer >= 30)
-        {
-            dropValue = 0;
-        }
-        else
-        {
-            dropValue = (30 - distanceToPlayer) / 25;
-        }
+        float dropValue = Mathf.Clamp((30 - distanceToPlayer) / 25, 0, 1);
         
         if(dropValue > 0)
         {
             int dropChance = Random.Range(0, 1000);
-
+            
             int healthDropChance = Mathf.Clamp(statusManager.playerHealth, 500, 1000);
 
             if (dropChance > healthDropChance)
