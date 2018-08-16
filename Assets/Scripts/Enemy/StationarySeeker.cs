@@ -11,14 +11,14 @@ public class StationarySeeker : MonoBehaviour {
     // Player transform reference
     private Transform playerTransform;
 
-    // State: Scanning, Tracking, Checking, Hurt
+    // State: Scanning, Tracking, Checking, Responding
     public string state = "Scanning";
 
     // Checks for sight
     private bool scanReady = true;
     private bool trackReady = true;
     private bool checkReady = true;
-    private bool hurtReady = true;
+    private bool respondReady = true;
     private bool losReady = true;
 
     // Line of sight movemnt speed
@@ -52,6 +52,7 @@ public class StationarySeeker : MonoBehaviour {
     // Enemy gunplay
     public GameObject enemyBullet;
     public Transform bulletSpawn;
+    public Transform[] bulletSources;
     public int initialfireDelay;
     public int maxFireDelay;
     private int curentFireDelay;
@@ -60,7 +61,7 @@ public class StationarySeeker : MonoBehaviour {
     public float checkTime;
 
     // New direction to turn to after getting hit
-    public Vector3 hurtRotation;
+    public Vector3 respondRotation;
 
     // Array of all wander points
     private GameObject[] allSeekerPoints;
@@ -92,9 +93,9 @@ public class StationarySeeker : MonoBehaviour {
         {
             StartCoroutine(Check());
         }
-        else if(hurtReady && state == "Hurt")
+        else if(respondReady && state == "Responding")
         {
-            StartCoroutine(Hurt());
+            StartCoroutine(Respond());
         }
 
         if (losReady)
@@ -299,10 +300,13 @@ public class StationarySeeker : MonoBehaviour {
             {
                 curentFireDelay = maxFireDelay;
 
-                GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, Quaternion.LookRotation(playerTransform.position - bulletSpawn.position));
-                
-                newBullet.GetComponent<BulletController>().type = type;
-                newBullet.GetComponent<BulletController>().canHurtPlayer = true;
+                foreach(Transform source in bulletSources)
+                {
+                    GameObject newBullet = Instantiate(enemyBullet, source.position, Quaternion.LookRotation(playerTransform.position - bulletSpawn.position));
+
+                    newBullet.GetComponent<BulletController>().type = type;
+                    newBullet.GetComponent<BulletController>().canHurtPlayer = true;
+                }
             }
         }
 
@@ -325,13 +329,16 @@ public class StationarySeeker : MonoBehaviour {
 
         checkReady = true;
 
-        state = "Scanning";
+        if (state == "Checking")
+        {
+            state = "Scanning";
+        }
     }
 
     // Set new scan position relative to source of damage
-    IEnumerator Hurt()
+    IEnumerator Respond()
     {
-        hurtReady = false;
+        respondReady = false;
         
         Ray firstRay = new Ray(transform.position, sightDirection);
 
@@ -342,13 +349,13 @@ public class StationarySeeker : MonoBehaviour {
             currentPosition = firstHit.point;
         }
 
-        Ray hurtRay = new Ray(transform.position, hurtRotation);
+        Ray respondRay = new Ray(transform.position, respondRotation);
 
-        RaycastHit HurtHit;
+        RaycastHit respondHit;
 
-        if(Physics.Raycast(hurtRay, out HurtHit))
+        if(Physics.Raycast(respondRay, out respondHit))
         {
-            newPosition = HurtHit.point;
+            newPosition = respondHit.point;
         }
         
         currentAngle = currentPosition - transform.position;
@@ -364,8 +371,11 @@ public class StationarySeeker : MonoBehaviour {
 
         yield return new WaitForSeconds(checkTime);
 
-        hurtReady = true;
+        respondReady = true;
 
-        state = "Scanning";
+        if(state == "Responding")
+        {
+            state = "Scanning";
+        }
     }
 }

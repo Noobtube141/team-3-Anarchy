@@ -84,7 +84,7 @@ public class EnemyStatusManager : MonoBehaviour {
     }
 
     // Called by player damage sources. Receive damage and detect death
-    public void EnemyTakeDamage(int damage, int type, Vector3 hurtRotation)
+    public void EnemyTakeDamage(int damage, int type, Vector3 respondRotation)
     {
         enemyHealth -= damage;
 
@@ -101,13 +101,13 @@ public class EnemyStatusManager : MonoBehaviour {
         {
             if (enemyType == "Sniper" || enemyType == "Boss")
             {
-                stationaryAI.state = "Hurt";
-                stationaryAI.hurtRotation = hurtRotation;
+                stationaryAI.state = "Responding";
+                stationaryAI.respondRotation = respondRotation;
             }
             else
             {
-                mobileAI.state = "Hurt";
-                mobileAI.hurtRotation = hurtRotation;
+                mobileAI.state = "Responding";
+                mobileAI.respondRotation = respondRotation;
             }
         }
     }

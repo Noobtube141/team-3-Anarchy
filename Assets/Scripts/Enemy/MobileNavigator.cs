@@ -21,15 +21,15 @@ public class MobileNavigator : MonoBehaviour {
     // Player transform reference
     private Transform playerTransform;
 
-    // State: Wandering, Pursuing, Checking, Hurt
+    // State: Wandering, Pursuing, Checking, Responding
     public string state = "Wandering";
 
     // Checks for movement
     private bool wanderReady = true;
     private bool pursueReady = true;
     private bool checkReady = true;
-    private bool hurtReady = true;
-    private bool losReady = true;
+    private bool respondReady = true;
+    private bool detectReady = true;
 
     // Movement speeds
     public float wanderSpeed;
@@ -49,6 +49,9 @@ public class MobileNavigator : MonoBehaviour {
     public float losLength;
     private Vector3 enemySightDirection;
 
+    // Size of area of detection
+    public float detectionRadius;
+
     // Firing range (stopping range of navmesh)
     public float firingRange;
 
@@ -58,15 +61,15 @@ public class MobileNavigator : MonoBehaviour {
     // Enemy gunplay
     public GameObject enemyBullet;
     public Transform bulletSpawn;
-    public int InitialfireDelay;
-    public int MaxFireDelay;
+    public int initialFireDelay;
+    public int maxFireDelay;
     private int curentFireDelay;
 
     // Time spent checking last known player position
     public float checkTime;
 
-    // New direction to turn to after getting hit
-    public Vector3 hurtRotation;
+    // New direction to turn to after getting hit/player entering aod
+    public Vector3 respondRotation;
 
     // Array of all wander points
     private GameObject[] allWanderPoints;
@@ -113,14 +116,14 @@ public class MobileNavigator : MonoBehaviour {
         {
             StartCoroutine(Check());
         }
-        else if(hurtReady && state == "Hurt")
+        else if(respondReady && state == "Responding")
         {
-            StartCoroutine(Hurt());
+            StartCoroutine(Respond());
         }
 
-        if (losReady)
+        if (detectReady)
         {
-            StartCoroutine(EnemyLOS());
+            StartCoroutine(DetectionCheck());
         }
 
         EnemyAnim.SetBool("Walking", mWalking);
@@ -128,12 +131,63 @@ public class MobileNavigator : MonoBehaviour {
         EnemyAnim.SetBool("Fire", mFire);
     }
 
+    // Check for player with line of sight and distance
+    IEnumerator DetectionCheck()
+    {
+        detectReady = false;
+
+        EnemySightDetection();
+        
+        yield return new WaitForSeconds(0.1f);
+
+        detectReady = true;
+    }
+
+    // Check line of sight and area of detection
+    void EnemySightDetection()
+    {
+        if (CheckLOS())
+        {
+            if (state != "Pursuing")
+            {
+                curentFireDelay = initialFireDelay;
+            }
+
+            state = "Pursuing";
+
+            gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 1, 1);
+        }
+        else if (CheckAOD())
+        {
+            state = "Responding";
+
+            respondRotation = playerTransform.position - transform.position;
+        }
+        else
+        {
+            if (state == "Pursuing")
+            {
+                state = "Checking";
+            }
+
+            gameObject.GetComponent<Renderer>().material.color = new Color(1, 0, 0, 1);
+        }
+    }
+
     // Check if the player is within line of sight
     bool CheckLOS()
     {
         Vector3 angleToPlayer = playerTransform.position - transform.position;
+        
+        if(state == "Pursuing")
+        {
+            enemySightDirection = playerTransform.position - transform.position;
+        }
+        else
+        {
+            enemySightDirection = transform.forward;
+        }
 
-        //if (Vector3.Angle(angleToPlayer, transform.forward) < losAngle)
         if (Vector3.Angle(angleToPlayer, enemySightDirection) < losAngle)
         {
             Ray ray = new Ray(transform.position, angleToPlayer);
@@ -151,45 +205,33 @@ public class MobileNavigator : MonoBehaviour {
 
         return false;
     }
-
-    // Check line of sight
-    IEnumerator EnemyLOS()
+    
+    // Check if the player is within area of detection
+    bool CheckAOD()
     {
-        losReady = false;
-
-        if (CheckLOS())
+        if(Vector3.Distance(transform.position, playerTransform.position) < detectionRadius)
         {
-            if(state != "Pursuing")
+            Ray ray = new Ray(transform.position, playerTransform.position - transform.position);
+
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit, losLength))
             {
-                curentFireDelay = InitialfireDelay;
+                if (hit.collider.tag == "Player")
+                {
+                    return true;
+                }
             }
-
-            state = "Pursuing";
-
-            gameObject.GetComponent<Renderer>().material.color = new Color(0, 0, 1, 1);
         }
-        else
-        {
-            if (state == "Pursuing")
-            {
-                state = "Checking";
-            }
-
-            gameObject.GetComponent<Renderer>().material.color = new Color(1, 0, 0, 1);
-        }
-
-        yield return new WaitForSeconds(0.1f);
-
-        losReady = true;
+        
+        return false;
     }
-
+    
     // Wander to random position
     IEnumerator Wander()
     {
         wanderReady = false;
-
-        enemySightDirection = transform.forward;
-
+        
         Vector3 position;
         
         FindRandomPosition(FindRandomWanderPoint(), wanderRadiusRand, out position);
@@ -277,9 +319,7 @@ public class MobileNavigator : MonoBehaviour {
     IEnumerator Pursue()
     {
         pursueReady = false;
-
-        enemySightDirection = playerTransform.position - transform.position;
-
+        
         transform.LookAt(new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z));
 
         agent.speed = pursuitSpeed;
@@ -294,7 +334,7 @@ public class MobileNavigator : MonoBehaviour {
 
             if (curentFireDelay < 1)
             {
-                curentFireDelay = MaxFireDelay;
+                curentFireDelay = maxFireDelay;
 
                 GameObject newBullet = Instantiate(enemyBullet, bulletSpawn.position, Quaternion.LookRotation(playerTransform.position - bulletSpawn.position));
 
@@ -324,12 +364,12 @@ public class MobileNavigator : MonoBehaviour {
     IEnumerator Check()
     {
         checkReady = false;
-
+        
         agent.speed = pursuitSpeed;
 
         agent.stoppingDistance = 0.0f;
 
-        if(Vector3.Magnitude(agent.velocity) > 0.1f)
+        if(Vector3.Magnitude(agent.velocity) > 0.25f)
         {
             yield return new WaitForSeconds(0.1f);
         }
@@ -338,44 +378,50 @@ public class MobileNavigator : MonoBehaviour {
 
         checkReady = true;
 
-        state = "Wandering";
+        if(state == "Checking")
+        {
+            state = "Wandering";
+        }
     }
 
     // Turn to direction of damage
-    IEnumerator Hurt()
+    IEnumerator Respond()
     {
-        hurtReady = false;
-
+        respondReady = false;
+        
         agent.SetDestination(transform.position);
 
-        float hurtTurnTime = 0;
+        float respondTurnTime = 0;
         
         Vector3 initialProjected = transform.position + transform.forward * 10;
-        Vector3 hurtProjected = transform.position + hurtRotation * 10;
+        Vector3 respondProjected = transform.position + respondRotation * 10;
 
-        Vector3 hurtScanDirection = initialProjected;
+        Vector3 respondScanDirection = initialProjected;
         
-        while(hurtScanDirection != hurtProjected && state == "Hurt")
+        while(respondScanDirection != respondProjected && state == "Responding")
         {
-            hurtScanDirection = Vector3.Slerp(initialProjected, hurtProjected, hurtTurnTime * 5);
+            respondScanDirection = Vector3.Slerp(initialProjected, respondProjected, respondTurnTime * 5);
 
-            transform.LookAt(new Vector3(hurtScanDirection.x, transform.position.y, hurtScanDirection.z));
+            transform.LookAt(new Vector3(respondScanDirection.x, transform.position.y, respondScanDirection.z));
             
             /*Debug.DrawRay(transform.position, initialProjected, Color.red, 10);
-            Debug.DrawRay(transform.position, hurtProjected, Color.blue, 10);
+            Debug.DrawRay(transform.position, respondProjected, Color.blue, 10);
             Debug.DrawRay(transform.position, transform.forward * 20, Color.green, 10);*/
 
-            hurtTurnTime += Time.deltaTime;
+            respondTurnTime += Time.deltaTime;
             
             yield return new WaitForEndOfFrame();
         }
         
         yield return new WaitForSeconds(checkTime);
 
-        hurtRotation = Vector3.zero;
+        respondRotation = Vector3.zero;
         
-        hurtReady = true;
+        respondReady = true;
         
-        state = "Wandering";
+        if(state == "Responding")
+        {
+            state = "Wandering";
+        }
     }
 }

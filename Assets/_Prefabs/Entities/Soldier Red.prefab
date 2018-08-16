@@ -1754,8 +1754,8 @@ MonoBehaviour:
   enemyBullet: {fileID: 1349531592167926, guid: c13b5b4bbd0c62a4dabad9c8d35499b9,
     type: 2}
   bulletSpawn: {fileID: 4287650737972032}
-  InitialfireDelay: 10
-  MaxFireDelay: 5
+  initialFireDelay: 10
+  maxFireDelay: 5
   checkTime: 5
   hurtRotation: {x: 0, y: 0, z: 0}
 --- !u!135 &135580431603352258

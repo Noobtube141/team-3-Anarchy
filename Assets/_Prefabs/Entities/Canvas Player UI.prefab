@@ -301,6 +301,7 @@ GameObject:
   - component: {fileID: 114063144585121582}
   - component: {fileID: 114650908364693006}
   - component: {fileID: 114319099346433674}
+  - component: {fileID: 114201043249140140}
   m_Layer: 5
   m_Name: Canvas Player UI
   m_TagString: Untagged
@@ -698,6 +699,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Sniper
+--- !u!114 &114201043249140140
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1541966281447498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 104f302577936ca45b51ab8132b70d86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiObject: {fileID: 0}
 --- !u!114 &114204327633642868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -881,7 +894,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3090f5131543896409dedaed5d2d9e0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exitObject: {fileID: 0}
 --- !u!114 &114405571300368182
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2202,7 +2214,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 600, y: -437.5}
-  m_SizeDelta: {x: 300, y: 50}
+  m_SizeDelta: {x: 300, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224664105150073580
 RectTransform:

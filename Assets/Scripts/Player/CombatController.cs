@@ -13,6 +13,8 @@ public class CombatController : MonoBehaviour {
 
     private GameObject equipedWeapon;
 
+    private string[] gunName = { "Pistol", "AR", "Shotgun", "Sniper Rifle", "SMG" };
+
     // Animator Reference
     private Animator weaponAnimator;
 
@@ -302,19 +304,19 @@ public class CombatController : MonoBehaviour {
         // Update ammo display
         if (currentWeapon == 0)
         {
-            ammoDisplay.text = clipCurrent[currentWeapon].ToString() + " / " + "\u221E";
+            ammoDisplay.text = gunName[currentWeapon] + "\n" + clipCurrent[currentWeapon].ToString() + " / " + "\u221E";
         }
         else if (currentWeapon < 5)
         {
-            ammoDisplay.text = clipCurrent[currentWeapon].ToString() + " / " + ammo[currentWeapon].ToString();
+            ammoDisplay.text = gunName[currentWeapon] + "\n" + clipCurrent[currentWeapon].ToString() + " / " + ammo[currentWeapon].ToString();
         }
         else if (currentWeapon == 5)
         {
-            ammoDisplay.text = "Broken bottle";
+            ammoDisplay.text = "Knife";
         }
         else if (currentWeapon == 6)
         {
-            ammoDisplay.text = "Knife";
+            ammoDisplay.text = "Broken bottle";
         }
         else if (currentWeapon == 7)
         {
