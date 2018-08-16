@@ -361,6 +361,7 @@ GameObject:
   - component: {fileID: 195669982948501566}
   - component: {fileID: 114564687703223656}
   - component: {fileID: 114312375405935422}
+  - component: {fileID: 82845132490811858}
   m_Layer: 2
   m_Name: SWAT
   m_TagString: Enemy
@@ -1689,6 +1690,101 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1939798263547828}
   m_Mesh: {fileID: 4300000, guid: 76ed8d99226b527449ae2453cac646a5, type: 3}
+--- !u!82 &82845132490811858
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1591186360551002}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &95706508137392010
 Animator:
   serializedVersion: 3
@@ -1739,6 +1835,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 8
   EnemyAnim: {fileID: 0}
+  mobileClips:
+  - {fileID: 8300000, guid: 2b72c1383f2cd6641a378cc3051c7df3, type: 3}
+  - {fileID: 8300000, guid: de684d5bdbba7a94ab514dcdccda089b, type: 3}
   state: Wandering
   wanderSpeed: 3
   pursuitSpeed: 3
@@ -1749,6 +1848,7 @@ MonoBehaviour:
   wanderDelayRandom: 2.5
   losAngle: 22.5
   losLength: 20
+  detectionRadius: 0
   firingRange: 12
   turnRate: 1
   enemyBullet: {fileID: 1349531592167926, guid: c13b5b4bbd0c62a4dabad9c8d35499b9,
@@ -1757,7 +1857,7 @@ MonoBehaviour:
   initialFireDelay: 30
   maxFireDelay: 50
   checkTime: 5
-  hurtRotation: {x: 0, y: 0, z: 0}
+  respondRotation: {x: 0, y: 0, z: 0}
 --- !u!135 &135132295627808660
 SphereCollider:
   m_ObjectHideFlags: 1

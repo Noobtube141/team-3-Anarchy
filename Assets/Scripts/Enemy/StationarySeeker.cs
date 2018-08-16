@@ -11,6 +11,9 @@ public class StationarySeeker : MonoBehaviour {
     // Player transform reference
     private Transform playerTransform;
 
+    // Sound control
+    private AudioSource stationaryAudio;
+
     // State: Scanning, Tracking, Checking, Responding
     public string state = "Scanning";
 
@@ -71,6 +74,8 @@ public class StationarySeeker : MonoBehaviour {
     void Start ()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+
+        stationaryAudio = GetComponent<AudioSource>();
 
         currentPosition = transform.position + transform.forward * 20;
 
@@ -300,7 +305,9 @@ public class StationarySeeker : MonoBehaviour {
             {
                 curentFireDelay = maxFireDelay;
 
-                foreach(Transform source in bulletSources)
+                stationaryAudio.PlayOneShot(stationaryAudio.clip);
+
+                foreach (Transform source in bulletSources)
                 {
                     GameObject newBullet = Instantiate(enemyBullet, source.position, Quaternion.LookRotation(playerTransform.position - bulletSpawn.position));
 

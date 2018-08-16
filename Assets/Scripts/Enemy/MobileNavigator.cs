@@ -16,7 +16,10 @@ public class MobileNavigator : MonoBehaviour {
 
     // Navmesh agent component reference
     private NavMeshAgent agent;
-    
+
+    // Sound control
+    private AudioSource mobileAudio;
+    public AudioClip[] mobileClips;
 
     // Player transform reference
     private Transform playerTransform;
@@ -79,6 +82,8 @@ public class MobileNavigator : MonoBehaviour {
     void Start ()
     {
         agent = GetComponent<NavMeshAgent>();
+
+        mobileAudio = GetComponent<AudioSource>();
 
         EnemyAnim = GetComponentInChildren<Animator>();
 
@@ -151,6 +156,8 @@ public class MobileNavigator : MonoBehaviour {
             if (state != "Pursuing")
             {
                 curentFireDelay = initialFireDelay;
+
+                mobileAudio.PlayOneShot(mobileClips[0]);
             }
 
             state = "Pursuing";
@@ -340,6 +347,8 @@ public class MobileNavigator : MonoBehaviour {
 
                 newBullet.GetComponent<BulletController>().type = type;
                 newBullet.GetComponent<BulletController>().canHurtPlayer = true;
+
+                mobileAudio.PlayOneShot(mobileClips[1]);
 
                 if(type == 7)
                 {

@@ -101,13 +101,19 @@ public class EnemyStatusManager : MonoBehaviour {
         {
             if (enemyType == "Sniper" || enemyType == "Boss")
             {
-                stationaryAI.state = "Responding";
-                stationaryAI.respondRotation = respondRotation;
+                if(stationaryAI.state != "Tracking")
+                {
+                    stationaryAI.state = "Responding";
+                    stationaryAI.respondRotation = respondRotation;
+                }
             }
             else
             {
-                mobileAI.state = "Responding";
-                mobileAI.respondRotation = respondRotation;
+                if (mobileAI.state != "Pursuing")
+                {
+                    mobileAI.state = "Responding";
+                    mobileAI.respondRotation = respondRotation;
+                }
             }
         }
     }

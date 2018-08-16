@@ -15,6 +15,10 @@ public class CombatController : MonoBehaviour {
 
     private string[] gunName = { "Pistol", "AR", "Shotgun", "Sniper Rifle", "SMG" };
 
+    // Sound control
+    private AudioSource playerAudio;
+    public AudioClip[] combatSounds;
+
     // Animator Reference
     private Animator weaponAnimator;
 
@@ -24,8 +28,7 @@ public class CombatController : MonoBehaviour {
 
     //Particle Reference and Disable
     public GameObject MuzzleFlashPistol;
-
-
+    
     // Tracks current weapon
     public int currentWeapon = 0;
     public int weaponCount = 5;
@@ -83,6 +86,10 @@ public class CombatController : MonoBehaviour {
     private void Start()
     {
         playerController = gameObject.GetComponent<PlayerController>();
+
+        playerAudio = GetComponent<AudioSource>();
+
+        playerAudio.clip = combatSounds[currentWeapon];
 
         equipedWeapon = Instantiate(allWeapons[currentWeapon], Camera.main.transform);
 
@@ -365,6 +372,8 @@ public class CombatController : MonoBehaviour {
 
         clipCurrent[currentWeapon] -= 1;
 
+        playerAudio.PlayOneShot(combatSounds[currentWeapon]);
+
         attackTime = Time.time;
     }
     
@@ -373,13 +382,17 @@ public class CombatController : MonoBehaviour {
     {
         Instantiate(allAttacks[currentWeapon], attackSpawn.position + Vector3.down * 0.125f, attackSpawn.rotation, gameObject.transform);
 
+        playerAudio.PlayOneShot(combatSounds[currentWeapon]);
+
         attackTime = Time.time;
     }
 
     // Control reloading
     void ReloadGun()
     {
-        if(currentWeapon > 0)
+        playerAudio.PlayOneShot(combatSounds[6]);
+        
+        if (currentWeapon > 0)
         {
             int reloadAmount = clipMax[currentWeapon] - clipCurrent[currentWeapon];
 
@@ -423,7 +436,7 @@ public class CombatController : MonoBehaviour {
         if(number <= weaponCount)
         {
             currentWeapon = number;
-
+            
             SwapWeapon();
         }
     }
@@ -432,7 +445,7 @@ public class CombatController : MonoBehaviour {
     void SwapWeapon()
     {
         Destroy(equipedWeapon);
-
+        
         equipedWeapon = Instantiate(allWeapons[currentWeapon], Camera.main.transform);
 
         weaponAnimator = GetComponentInChildren<Animator>();
