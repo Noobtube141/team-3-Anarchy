@@ -41,20 +41,18 @@ public class MusicManager : MonoBehaviour {
         // Menu track fades out, combat track fades in
         if (type == "IntoGame")
         {
-            print(type);
-
             isInCombat = true;
 
             trackSources[1].GetComponent<AudioSource>().Play();
 
             trackSources[1].GetComponent<AudioSource>().volume = 0.0f;
 
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 31; i++)
             {
                 trackSources[0].GetComponent<AudioSource>().volume = (30 - i) / 30.0f;
 
                 trackSources[1].GetComponent<AudioSource>().volume = i / 30.0f;
-
+                
                 yield return new WaitForSeconds(0.01f);
             }
 
@@ -65,15 +63,13 @@ public class MusicManager : MonoBehaviour {
         // Combat track fades out, idle track fades in
         else if (type == "EnemiesEliminated")
         {
-            print(type);
-
             isInCombat = false;
 
             trackSources[2].GetComponent<AudioSource>().Play();
 
             trackSources[2].GetComponent<AudioSource>().volume = 0.0f;
 
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 31; i++)
             {
                 trackSources[1].GetComponent<AudioSource>().volume = (30 - i) / 30.0f;
 
@@ -86,10 +82,8 @@ public class MusicManager : MonoBehaviour {
 
             trackSources[1].GetComponent<AudioSource>().Stop();
         }
-        if (type == "IntoMenu")
+        else if (type == "IntoMenu")
         {
-            print(type);
-
             int combatState;
 
             if (isInCombat)
@@ -101,23 +95,25 @@ public class MusicManager : MonoBehaviour {
                 combatState = 2;
             }
 
+            print(combatState);
+
             trackSources[0].GetComponent<AudioSource>().Play();
 
             trackSources[0].GetComponent<AudioSource>().volume = 0.0f;
 
-            for (int i = 0; i < 30; i++)
+            for (int i = 0; i < 31; i++)
             {
                 trackSources[combatState].GetComponent<AudioSource>().volume = (30 - i) / 30.0f;
 
                 trackSources[0].GetComponent<AudioSource>().volume = i / 30.0f;
-
+                
                 yield return new WaitForSeconds(0.01f);
             }
-
+            
             trackSources[combatState].GetComponent<AudioSource>().volume = 0.0f;
 
             trackSources[combatState].GetComponent<AudioSource>().Stop();
-
+            
             isInCombat = false;
         }
     }
@@ -125,8 +121,6 @@ public class MusicManager : MonoBehaviour {
     // Switch from idle to combat music. Called at the start of a level
     public void IdleToCombat()
     {
-        print("swap test");
-
         isInCombat = true;
 
         trackSources[2].GetComponent<AudioSource>().volume = 0.0f;

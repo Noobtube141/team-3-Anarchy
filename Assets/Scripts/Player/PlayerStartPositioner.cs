@@ -21,11 +21,14 @@ public class PlayerStartPositioner : MonoBehaviour {
 
 	void Start ()
     {
+        Time.timeScale = 1;
+
         if (shouldPlayerBeDestroyed)
         {
             GameObject.FindGameObjectWithTag("Music Player").SendMessage("CrossFade", "MusicToMenu");
             
             Destroy(GameObject.FindGameObjectWithTag("Player"));
+            Destroy(GameObject.Find("PersistentUI"));
         }
         else
         {
