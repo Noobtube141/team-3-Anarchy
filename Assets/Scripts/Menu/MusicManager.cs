@@ -129,7 +129,11 @@ public class MusicManager : MonoBehaviour {
 
         isInCombat = true;
 
+        trackSources[2].GetComponent<AudioSource>().volume = 0.0f;
+
         trackSources[2].GetComponent<AudioSource>().Stop();
+
+        trackSources[1].GetComponent<AudioSource>().volume = 1.0f;
 
         trackSources[1].GetComponent<AudioSource>().Play();
     }
