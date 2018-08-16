@@ -14944,7 +14944,7 @@ Prefab:
         type: 2}
       propertyPath: musicPlayer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1250669012}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 25bc61dc8b3a85b439af98c454c043ad, type: 2}
   m_IsPrefabParent: 0
