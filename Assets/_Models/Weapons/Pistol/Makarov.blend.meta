@@ -1,32 +1,18 @@
 fileFormatVersion: 2
-guid: fb8042f5d06c2cb4f8ea60f62760c257
+guid: 4944f2131dcc6604fa0461c98570a612
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
     400000: //RootNode
-    2100000: unnamed
-    2100002: Material__Complete_Shotgun
-    2100004: Material__M30_Luftwaffe_UV_jpg
-    2100006: Material__M30_Luftwaffe_UV_jpg_001
-    2100008: Material__M30_Luftwaffe_UV_jpg_002
+    2100000: Material__Complete_Makarov
+    2100002: Material__Makarov_UV_jpg
     2300000: //RootNode
     3300000: //RootNode
-    4300000: m30
+    4300000: Makarov
     7400000: Default Take
     9500000: //RootNode
-    2186277476908879412: ImportLogs
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material__Complete_Shotgun
-    second: {fileID: 2100000, guid: 8c141325ee10b60438a643447580dac1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material__M30_Luftwaffe_UV_jpg_001
-    second: {fileID: 2100000, guid: 8c141325ee10b60438a643447580dac1, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
@@ -57,7 +43,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.1
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importVisibility: 1
