@@ -40222,6 +40222,11 @@ Prefab:
       propertyPath: musicPlayer
       value: 
       objectReference: {fileID: 1119074741}
+    - target: {fileID: 82103370994748868, guid: 25bc61dc8b3a85b439af98c454c043ad,
+        type: 2}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2e96cbd497e3fca489d501c3527a1105, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 25bc61dc8b3a85b439af98c454c043ad, type: 2}
   m_IsPrefabParent: 0
@@ -48824,6 +48829,11 @@ Prefab:
         type: 2}
       propertyPath: nextLevel
       value: CS_LevelTwo
+      objectReference: {fileID: 0}
+    - target: {fileID: 114275356408703870, guid: bd189f85d29566a4ea5e9eee52d82635,
+        type: 2}
+      propertyPath: isEnteringLevels
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd189f85d29566a4ea5e9eee52d82635, type: 2}
