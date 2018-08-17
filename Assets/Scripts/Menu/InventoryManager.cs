@@ -58,6 +58,9 @@ public class InventoryManager : MonoBehaviour {
     // Close inventory on input other than movement
     void LateUpdate ()
     {
+        // Check if running in the editor or standalone build
+        #if UNITY_STANDALONE || UNITY_WEBPLAYER
+
         if (Input.GetButtonDown("Fire2") || Input.GetAxisRaw("Mouse ScrollWheel") != 0 || Input.GetKey(KeyCode.R) ||
             Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Alpha4) ||
             Input.GetKeyDown(KeyCode.Alpha5) || Input.GetKeyDown(KeyCode.Alpha6) || Input.GetKeyDown(KeyCode.Alpha7) || Input.GetKeyDown(KeyCode.Alpha8))
@@ -67,17 +70,29 @@ public class InventoryManager : MonoBehaviour {
 
         if (Input.GetButtonDown("Fire1") && !EventSystem.current.IsPointerOverGameObject())
         {
-            print("test off");
-
             closeCoroutine = StartCoroutine(CloseInventory());
         }
-	}
+
+        // Check if running on mobile
+        #elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+
+        if (Input.touchCount > 0)
+        {
+            foreach(Touch fingerTouch in Input.touches)
+            {
+                if(fingerTouch.phase == TouchPhase.Began && !EventSystem.current.IsPointerOverGameObject())
+                {
+                    closeCoroutine = StartCoroutine(CloseInventory());
+                }
+            }
+        }
+
+        #endif
+    }
 
     // Try to swap to a weapon
     public void SelectOnClick(int number)
     {
-        print("test on");
-
         wasButtonClicked = true;
 
         if(closeCoroutine != null)

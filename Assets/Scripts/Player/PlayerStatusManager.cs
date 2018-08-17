@@ -52,7 +52,10 @@ public class PlayerStatusManager : MonoBehaviour {
         healthBar.fillAmount = playerHealth / 1000.0f;
         armourBar.fillAmount = playerArmour / 1000.0f;
 
-        if(playerHealth > 0)
+        // Check if running in the editor or standalone build
+        #if UNITY_STANDALONE || UNITY_WEBPLAYER
+
+        if (playerHealth > 0)
         {
             healthValue.text = Mathf.Clamp(Mathf.FloorToInt(playerHealth / 10.0f), 1, 1000).ToString();
         }
@@ -61,6 +64,8 @@ public class PlayerStatusManager : MonoBehaviour {
             healthValue.text = "0";
         }
         armourValue.text = Mathf.FloorToInt(playerArmour / 10.0f).ToString();
+
+        #endif
     }
 
     // Called by enemies. Receieve damage and detect death
