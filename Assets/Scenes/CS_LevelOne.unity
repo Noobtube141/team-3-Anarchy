@@ -39890,6 +39890,21 @@ Prefab:
       propertyPath: exitObject
       value: 
       objectReference: {fileID: 1214909711}
+    - target: {fileID: 224661853582559816, guid: ec5a85d0601261c469875f8630798ac9,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -447.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224661853582559816, guid: ec5a85d0601261c469875f8630798ac9,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 114201043249140140, guid: ec5a85d0601261c469875f8630798ac9,
+        type: 2}
+      propertyPath: failSuccessManager
+      value: 
+      objectReference: {fileID: 1179956436}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec5a85d0601261c469875f8630798ac9, type: 2}
   m_IsPrefabParent: 0
