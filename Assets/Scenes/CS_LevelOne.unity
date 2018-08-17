@@ -32860,6 +32860,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114558909221344792, guid: 91292147854ab84498e11f02d859c40f,
+        type: 2}
+      propertyPath: failSuccessManager
+      value: 
+      objectReference: {fileID: 1179956436}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 91292147854ab84498e11f02d859c40f, type: 2}
   m_IsPrefabParent: 0
@@ -34263,7 +34268,7 @@ MonoBehaviour:
   enemyCount: 0
   lowerEnemyBound: 2
   waveNumber: 0
-  waveMax: 1
+  waveMax: 3
 --- !u!4 &1276205460
 Transform:
   m_ObjectHideFlags: 0
@@ -63462,7 +63467,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh8392
+  m_Name: pb_Mesh20908
   serializedVersion: 8
   m_SubMeshes:
   - serializedVersion: 2

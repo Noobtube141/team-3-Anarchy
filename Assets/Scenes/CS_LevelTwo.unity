@@ -312,6 +312,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114558909221344792, guid: 91292147854ab84498e11f02d859c40f,
+        type: 2}
+      propertyPath: failSuccessManager
+      value: 
+      objectReference: {fileID: 5469470}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 91292147854ab84498e11f02d859c40f, type: 2}
   m_IsPrefabParent: 0

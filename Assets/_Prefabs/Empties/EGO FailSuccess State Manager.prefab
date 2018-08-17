@@ -154,6 +154,7 @@ MonoBehaviour:
   isPlayerUI: 0
   isPauseUI: 0
   isFailSuccessUI: 1
+  failSuccessManager: {fileID: 0}
 --- !u!114 &114601395385638730
 MonoBehaviour:
   m_ObjectHideFlags: 1
