@@ -25,6 +25,12 @@ public class CameraController : MonoBehaviour {
     // Pause manager
     public PauseManager pauseManager;
 
+    // Touch to detect as moving the camera
+    public int cameraTouchID;
+
+    // Joystick to prevent looking while moving
+    public JoystickController joystickController;
+
     // Set mouse sensitivity
     void Start ()
     {
@@ -41,7 +47,44 @@ public class CameraController : MonoBehaviour {
         {
             if (isRotatingHorizontally)
             {
+                // Check if running in the editor or standalone build
+                #if UNITY_STANDALONE || UNITY_WEBPLAYER
+
                 rotationHorizontal += Input.GetAxis("Mouse X") * mouseSensitivityX;
+
+                // Check if running on mobile
+                #elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+
+                if(Input.touchCount > 0)
+                {
+                    foreach(Touch fingerTouch in Input.touches)
+                    {
+                        if(fingerTouch.fingerId != joystickController.joystickTouchID)
+                        {
+                            if (EventSystem.current.IsPointerOverGameObject(fingerTouch.fingerId))
+                            {
+                                // Empty
+                            }
+                            else if (!EventSystem.current.IsPointerOverGameObject(fingerTouch.fingerId))
+                            {
+                                if (fingerTouch.phase == TouchPhase.Began)
+                                {
+                                    cameraTouchID = fingerTouch.fingerId;
+                                }
+                            }
+
+                            if (!EventSystem.current.IsPointerOverGameObject(cameraTouchID))
+                            {
+                                if (Input.touches[cameraTouchID].phase == TouchPhase.Moved)
+                                {
+                                    rotationHorizontal += Input.touches[cameraTouchID].deltaPosition.x * mouseSensitivityX * 0.1f;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                #endif
 
                 Quaternion quaternionHorizontal = Quaternion.AngleAxis(rotationHorizontal, Vector3.up);
 
@@ -49,7 +92,44 @@ public class CameraController : MonoBehaviour {
             }
             else
             {
+                // Check if running in the editor or standalone build
+                #if UNITY_STANDALONE || UNITY_WEBPLAYER
+
                 rotationVertical += Input.GetAxis("Mouse Y") * mouseSensitivityY * mouseInversion;
+
+                // Check if running on mobile
+                #elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+
+                if (Input.touchCount > 0)
+                {
+                    foreach (Touch fingerTouch in Input.touches)
+                    {
+                        if (fingerTouch.fingerId != joystickController.joystickTouchID)
+                        {
+                            if (EventSystem.current.IsPointerOverGameObject(fingerTouch.fingerId))
+                            {
+                                // empty
+                            }
+                            else if (!EventSystem.current.IsPointerOverGameObject(fingerTouch.fingerId))
+                            {
+                                if (fingerTouch.phase == TouchPhase.Began)
+                                {
+                                    cameraTouchID = fingerTouch.fingerId;
+                                }
+                            }
+
+                            if (!EventSystem.current.IsPointerOverGameObject(cameraTouchID))
+                            {
+                                if (Input.touches[cameraTouchID].phase == TouchPhase.Moved)
+                                {
+                                    rotationVertical += Input.touches[cameraTouchID].deltaPosition.y * mouseSensitivityY * 0.1f;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                #endif
 
                 if (rotationVertical < -45.0f)
                 {
