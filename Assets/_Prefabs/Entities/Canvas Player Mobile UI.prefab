@@ -335,6 +335,7 @@ GameObject:
   - component: {fileID: 223109312333905776}
   - component: {fileID: 114173502167305112}
   - component: {fileID: 114397795911502220}
+  - component: {fileID: 114532277151510352}
   m_Layer: 5
   m_Name: Canvas Player Mobile UI
   m_TagString: Untagged
@@ -1753,6 +1754,18 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114532277151510352
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1509939285382736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df336f3714963ea428b9ae68a7b9b3bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isMobileUI: 1
 --- !u!114 &114565459291379588
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -116,6 +116,9 @@ public class CombatController : MonoBehaviour {
         // Exit on clicking exit object
         if (canExit)
         {
+            // Check if running in the editor or standalone build
+            #if UNITY_STANDALONE || UNITY_WEBPLAYER
+
             if (Input.GetButtonDown("Fire1"))
             {
                 Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -131,7 +134,7 @@ public class CombatController : MonoBehaviour {
                         if (isLastLevel)
                         {
                             gameObject.GetComponent<PlayerStatusManager>().OnDeath(false);
-                            
+
                             return;
                         }
                         else
@@ -141,10 +144,47 @@ public class CombatController : MonoBehaviour {
                     }
                 }
             }
+
+            // Check if running on mobile
+            #elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+
+            if (Input.touchCount > 0)
+                {
+                    foreach(Touch fingerTouch in Input.touches)
+                    {
+                        if(fingerTouch.phase == TouchPhase.Began)
+                        {
+                            Ray cameraRay = Camera.main.ScreenPointToRay(fingerTouch.position);
+
+                            Debug.DrawRay(cameraRay.origin, cameraRay.direction * 20, Color.blue);
+
+                            RaycastHit hit;
+
+                            if (Physics.Raycast(cameraRay, out hit))
+                            {
+                                if (hit.collider.tag == "Exit" && hit.distance < 1.5f)
+                                {
+                                    if (isLastLevel)
+                                    {
+                                        gameObject.GetComponent<PlayerStatusManager>().OnDeath(false);
+
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        SceneManager.LoadScene(scene);
+                                    }
+                                }
+                            }
+                    }
+                    }
+                }
+
+            #endif
         }
 
         // Check if running in the editor or standalone build
-        #if UNITY_STANDALONE || UNITY_WEBPLAYER
+#if UNITY_STANDALONE || UNITY_WEBPLAYER
 
         // Select weapons (only if not scoped)
         if (Camera.main.fieldOfView >= 58 && fovAlt == 1)
@@ -238,13 +278,13 @@ public class CombatController : MonoBehaviour {
             }
         }
 
-        #endif
+#endif
 
         // Control combat while the inventory is closed and not running
         if (!isInventoryActive && !playerController.isSprinting)
         {
             // Check if running in the editor or standalone build
-            #if UNITY_STANDALONE || UNITY_WEBPLAYER
+#if UNITY_STANDALONE || UNITY_WEBPLAYER
 
             // Control combat for pistol, shotgun, sniper rifle, broken bottle, knife and shovel
             if (currentWeapon != 1 && currentWeapon != 4)
@@ -287,7 +327,7 @@ public class CombatController : MonoBehaviour {
             }
 
             // Check if running on mobile
-            #elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
 
             // Combat control
 
@@ -320,11 +360,11 @@ public class CombatController : MonoBehaviour {
                 toShoot = false;
             }
             
-            #endif
+#endif
         }
 
         // Check if running in the editor or standalone build
-        #if UNITY_STANDALONE || UNITY_WEBPLAYER
+#if UNITY_STANDALONE || UNITY_WEBPLAYER
 
         // Detect reload
         if (Input.GetKey(KeyCode.R))
@@ -359,7 +399,7 @@ public class CombatController : MonoBehaviour {
             }
         }
 
-        #endif
+#endif
 
         // Update ammo display
         if (currentWeapon == 0)
@@ -587,7 +627,7 @@ public class CombatController : MonoBehaviour {
         }
 
         // Check if running on mobile
-        #if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+#if UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
 
         if (currentWeapon == 3)
         {
@@ -598,7 +638,7 @@ public class CombatController : MonoBehaviour {
             zoomButton.interactable = false;
         }
 
-        #endif
+#endif
     }
 
     // Swap weapon prefabs
