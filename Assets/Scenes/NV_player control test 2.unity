@@ -3346,17 +3346,16 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 114768577357492208, guid: ec5a85d0601261c469875f8630798ac9,
-        type: 2}
-      propertyPath: combatController
-      value: 
-      objectReference: {fileID: 66996902}
     - target: {fileID: 1541966281447498, guid: ec5a85d0601261c469875f8630798ac9, type: 2}
       propertyPath: m_Name
       value: Canvas player ui
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114201043249140140, guid: ec5a85d0601261c469875f8630798ac9, type: 2}
+    - target: {fileID: 114201043249140140, guid: ec5a85d0601261c469875f8630798ac9,
+        type: 2}
+      propertyPath: failSuccessManager
+      value: 
+      objectReference: {fileID: 1102965706}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec5a85d0601261c469875f8630798ac9, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1252098756
@@ -4270,6 +4269,37 @@ Prefab:
       propertyPath: inventory
       value: 
       objectReference: {fileID: 747674138}
+    - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
+        type: 2}
+      propertyPath: allWeapons.Array.data[1]
+      value: 
+      objectReference: {fileID: 100000, guid: ac4c28ac8117c214d8feb354184eaf4d, type: 3}
+    - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
+        type: 2}
+      propertyPath: allWeapons.Array.data[5]
+      value: 
+      objectReference: {fileID: 1816862630530496, guid: 7b9d010f40820704baf421fd74efdde2,
+        type: 2}
+    - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
+        type: 2}
+      propertyPath: allWeapons.Array.data[0]
+      value: 
+      objectReference: {fileID: 100000, guid: 6aa0f93b6a8a27749bc2d0286e4032e7, type: 3}
+    - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
+        type: 2}
+      propertyPath: allWeapons.Array.data[4]
+      value: 
+      objectReference: {fileID: 100000, guid: d18f57074bce241438db4dfbc52f6bd6, type: 3}
+    - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
+        type: 2}
+      propertyPath: allWeapons.Array.data[3]
+      value: 
+      objectReference: {fileID: 100000, guid: 32cf78c70b3b08e47b1963259fe5be4f, type: 3}
+    - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
+        type: 2}
+      propertyPath: allWeapons.Array.data[2]
+      value: 
+      objectReference: {fileID: 100000, guid: dbc2290aca572ba47a22ee46f63d3a51, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a735357629067a54591441a25d65bfc4, type: 2}
   m_IsPrefabParent: 0

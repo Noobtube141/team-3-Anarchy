@@ -142,6 +142,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4792658787389230}
   - component: {fileID: 114628009740894158}
+  - component: {fileID: 114762069432122216}
   m_Layer: 0
   m_Name: EGO Pause Manager
   m_TagString: Untagged
@@ -418,6 +419,21 @@ MonoBehaviour:
   isDeath: 0
   stateMessage: You've died
   stateText: {fileID: 114066112128598478}
+--- !u!114 &114762069432122216
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1879469388435144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 104f302577936ca45b51ab8132b70d86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  uiObject: {fileID: 0}
+  isPlayerUI: 0
+  isPauseUI: 1
+  isFailSuccessUI: 0
 --- !u!114 &114881931607553076
 MonoBehaviour:
   m_ObjectHideFlags: 1

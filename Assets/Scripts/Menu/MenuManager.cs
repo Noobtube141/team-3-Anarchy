@@ -11,10 +11,12 @@ public class MenuManager : MonoBehaviour {
 
     // Bools controlling the active menu
     public bool isMenuActive = true;
+    public bool isInstructionsActive = false;
     public bool isSettingsActive = false;
 
     // EGOs containing menu UIs
     public GameObject menu;
+    public GameObject instructions;
     public GameObject settings;
 
     // Sliders
@@ -36,6 +38,7 @@ public class MenuManager : MonoBehaviour {
     private void Awake()
     {
         menu.SetActive(isMenuActive);
+        instructions.SetActive(isInstructionsActive);
         settings.SetActive(isSettingsActive);
 
         Cursor.lockState = CursorLockMode.None;
@@ -63,6 +66,14 @@ public class MenuManager : MonoBehaviour {
         isMenuActive = !isMenuActive;
         
         menu.SetActive(isMenuActive);
+    }
+
+    // Toggle instructions menu
+    public void ToggleInstructions()
+    {
+        isInstructionsActive = !isInstructionsActive;
+
+        instructions.SetActive(isInstructionsActive);
     }
 
     // Toggle settings menu

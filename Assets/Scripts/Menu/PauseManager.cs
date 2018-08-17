@@ -124,9 +124,7 @@ public class PauseManager : MonoBehaviour {
     public void ReturnToMenu()
     {
         GameObject.FindGameObjectWithTag("Music Player").SendMessage("CrossFade", "IntoMenu");
-
-        print("test a");
-
+        
         SceneManager.LoadScene(scene);
     }
 }

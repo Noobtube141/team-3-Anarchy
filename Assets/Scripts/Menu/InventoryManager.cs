@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class InventoryManager : MonoBehaviour {
     
@@ -64,8 +65,10 @@ public class InventoryManager : MonoBehaviour {
             DisableInventory();
         }
 
-        if (Input.GetButtonDown("Fire1") && !wasButtonClicked)
+        if (Input.GetButtonDown("Fire1") && !EventSystem.current.IsPointerOverGameObject())
         {
+            print("test off");
+
             closeCoroutine = StartCoroutine(CloseInventory());
         }
 	}
@@ -73,9 +76,14 @@ public class InventoryManager : MonoBehaviour {
     // Try to swap to a weapon
     public void SelectOnClick(int number)
     {
+        print("test on");
+
         wasButtonClicked = true;
 
-        StopCoroutine(closeCoroutine);
+        if(closeCoroutine != null)
+        {
+            StopCoroutine(closeCoroutine);
+        }
 
         combatController.InventoryWeaponSelect(number);
         

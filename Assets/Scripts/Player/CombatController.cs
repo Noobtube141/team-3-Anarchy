@@ -100,6 +100,12 @@ public class CombatController : MonoBehaviour {
     // Respond to inputs and update UI
     void Update ()
     {
+        // Disallow control when the game is paused
+        if(Time.timeScale < 1)
+        {
+            return;
+        }
+        
         // Exit on clicking exit object
         if (canExit)
         {
@@ -448,7 +454,7 @@ public class CombatController : MonoBehaviour {
         
         equipedWeapon = Instantiate(allWeapons[currentWeapon], Camera.main.transform);
 
-        weaponAnimator = GetComponentInChildren<Animator>();
+        weaponAnimator = equipedWeapon.GetComponent<Animator>();
     }
 
     // Increase weaponCount to allow access to knife

@@ -94,9 +94,7 @@ public class MusicManager : MonoBehaviour {
             {
                 combatState = 2;
             }
-
-            print(combatState);
-
+            
             trackSources[0].GetComponent<AudioSource>().Play();
 
             trackSources[0].GetComponent<AudioSource>().volume = 0.0f;
