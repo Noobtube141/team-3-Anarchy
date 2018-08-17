@@ -8102,6 +8102,31 @@ Prefab:
       value: 
       objectReference: {fileID: 1953826768033848, guid: 8e8a5d47ae50b964898860426ee1f369,
         type: 2}
+    - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
+        type: 2}
+      propertyPath: ammo.Array.data[1]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
+        type: 2}
+      propertyPath: ammo.Array.data[2]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
+        type: 2}
+      propertyPath: ammo.Array.data[3]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184948650010414, guid: a735357629067a54591441a25d65bfc4,
+        type: 2}
+      propertyPath: ammo.Array.data[4]
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114092936467407724, guid: a735357629067a54591441a25d65bfc4,
+        type: 2}
+      propertyPath: playerArmour
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a735357629067a54591441a25d65bfc4, type: 2}
   m_IsPrefabParent: 0
