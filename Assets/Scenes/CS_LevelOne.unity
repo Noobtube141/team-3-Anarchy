@@ -39893,18 +39893,33 @@ Prefab:
     - target: {fileID: 224661853582559816, guid: ec5a85d0601261c469875f8630798ac9,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -447.5
+      value: -402.25
       objectReference: {fileID: 0}
     - target: {fileID: 224661853582559816, guid: ec5a85d0601261c469875f8630798ac9,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 600
+      value: 621
       objectReference: {fileID: 0}
     - target: {fileID: 114201043249140140, guid: ec5a85d0601261c469875f8630798ac9,
         type: 2}
       propertyPath: failSuccessManager
       value: 
       objectReference: {fileID: 1179956436}
+    - target: {fileID: 114005587579457134, guid: ec5a85d0601261c469875f8630798ac9,
+        type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114005587579457134, guid: ec5a85d0601261c469875f8630798ac9,
+        type: 2}
+      propertyPath: m_FontData.m_Alignment
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 224661853582559816, guid: ec5a85d0601261c469875f8630798ac9,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 95.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ec5a85d0601261c469875f8630798ac9, type: 2}
   m_IsPrefabParent: 0
