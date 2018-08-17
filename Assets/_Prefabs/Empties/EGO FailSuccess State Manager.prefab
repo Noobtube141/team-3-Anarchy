@@ -40,7 +40,7 @@ GameObject:
   - component: {fileID: 114601395385638730}
   - component: {fileID: 114558909221344792}
   m_Layer: 0
-  m_Name: EGO FailSuccess State Manager
+  m_Name: PersistentFailSuccessUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
